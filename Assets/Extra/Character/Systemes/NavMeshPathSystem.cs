@@ -13,7 +13,7 @@ public class NavMeshPathSystem : ComponentSystem
     private void MousePointMoveJob()
     {
         if (Input.GetMouseButtonDown(1))
-            Entities.ForEach((CharacterStatus status, UnityEngine.AI.NavMeshAgent agent) =>
+            Entities.ForEach((CharacterControllerStatus status, UnityEngine.AI.NavMeshAgent agent) =>
             {
                 if (status.isConscriptSelected)
                 {

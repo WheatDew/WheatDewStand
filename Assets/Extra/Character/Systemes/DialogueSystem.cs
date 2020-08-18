@@ -10,6 +10,7 @@ public class DialogueSystem : ComponentSystem
 
     protected override void OnStartRunning()
     {
+        //初始化DialogueBox
         Entities.ForEach((DialogueBox dialogueBox) =>
         {
             m_dialogueBox = dialogueBox;
@@ -30,9 +31,9 @@ public class DialogueSystem : ComponentSystem
     {
         if (Input.GetMouseButtonDown(0))
         {
-            CharacterStatus selfStatus=null;
+            CharacterControllerStatus selfStatus=null;
 
-            Entities.ForEach((CharacterStatus status) =>
+            Entities.ForEach((CharacterControllerStatus status) =>
             {
                 if (status.isConscriptSelected)
                 {
@@ -50,7 +51,7 @@ public class DialogueSystem : ComponentSystem
             if (selfStatus&&Vector3.Distance(selfStatus.transform.position, selfStatus.CharacterDialogueWith.position) < 3)
             {
                 m_dialogueBox.isDisplay = true;
-                Entities.ForEach((CharacterStatus targetStatus) => {
+                Entities.ForEach((CharacterControllerStatus targetStatus) => {
                     if (selfStatus.CharacterDialogueWith == targetStatus.transform)
                         m_dialogueBox.Content = targetStatus.ContentDialogueWith;
                 });
@@ -58,7 +59,7 @@ public class DialogueSystem : ComponentSystem
         }
             
 
-        Entities.ForEach((CharacterStatus status) =>
+        Entities.ForEach((CharacterControllerStatus status) =>
         {
             if(status.CharacterDialogueWith&&Vector3.Distance(status.transform.position,status.CharacterDialogueWith.position)>5)
             {
@@ -76,7 +77,6 @@ public class DialogueSystem : ComponentSystem
 
         //控制内容
         m_dialogueBox.DisplayContent.text = m_dialogueBox.Content;
-
 
     }
 }
