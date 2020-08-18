@@ -7,7 +7,6 @@ public class DialogueSystem : ComponentSystem
 {
     private DialogueBox m_dialogueBox;
 
-
     protected override void OnStartRunning()
     {
         //初始化DialogueBox
@@ -57,7 +56,6 @@ public class DialogueSystem : ComponentSystem
                 });
             }
         }
-            
 
         Entities.ForEach((CharacterControllerStatus status) =>
         {
