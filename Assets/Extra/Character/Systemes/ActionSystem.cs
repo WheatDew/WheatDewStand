@@ -17,14 +17,28 @@ public class ActionSystem : ComponentSystem
             }
         });
         Debug.Log("IconDictionary Initialization Successful");
+        
     }
 
     protected override void OnUpdate()
     {
-        Entities.ForEach((CharacterStatus status,CharacterControllerStatus controllerStatus) => {
-            if(iconPair.ContainsKey(status.Action))
+        UpdataStatusIconJob();
+    }
+
+    public void UpdataStatusIconJob()
+    {
+        Entities.ForEach((CharacterStatus status, CharacterControllerStatus controllerStatus) => {
+
+            if (iconPair.ContainsKey(status.Action))
             {
+                controllerStatus.StatusBubbleObject.SetActive(true);
+                //controllerStatus.StatusBubbleObject.transform.rotation = Quaternion.AngleAxis(0, Vector3.up);
+                //根据角色动作信息在图标字典中获取图标纹理
                 controllerStatus.StatusBubble.material.SetTexture(1, iconPair[status.Action]);
+            }
+            else
+            {
+                controllerStatus.StatusBubbleObject.SetActive(false);
             }
         });
     }
