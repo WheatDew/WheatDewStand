@@ -947,6 +947,11 @@ PrefabInstance:
       propertyPath: m_ObstacleAvoidanceType
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1149293984193976718, guid: aeef162769447e641b28aec02cd543c4,
+        type: 3}
+      propertyPath: HungerValue
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 1149293984193976719, guid: aeef162769447e641b28aec02cd543c4,
         type: 3}
       propertyPath: m_Name
