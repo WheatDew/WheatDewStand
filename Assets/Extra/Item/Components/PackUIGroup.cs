@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public struct Item
+public class PackUIGroup : MonoBehaviour
 {
-    
+    public string command;
 }
