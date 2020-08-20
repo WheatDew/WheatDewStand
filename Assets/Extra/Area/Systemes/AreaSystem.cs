@@ -28,5 +28,24 @@ public class AreaSystem : ComponentSystem
             }
             area.CharacterOutside.Clear();
         });
+
+        Entities.ForEach((CharacterStatus characterStatus,CharacterPack characterPack) => {
+            if (characterStatus.Action.Equals("获取"))
+            {
+                characterStatus.ActionValue += Time.DeltaTime;
+
+                if (characterStatus.ActionValue > 1)
+                {
+                    if (characterPack.Pack.ContainsKey("材料"))
+                    {
+                        characterPack.Pack["材料"]++;
+                        Debug.Log("材料+1");
+                    }
+                    else
+                        characterPack.Pack.Add("材料", 1);
+                    characterStatus.ActionValue = 0;
+                }
+            }
+        });
     }
 }

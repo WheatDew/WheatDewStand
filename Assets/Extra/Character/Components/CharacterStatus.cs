@@ -13,4 +13,6 @@ public class CharacterStatus : MonoBehaviour
 
     //角色属性
     public float HungerValue;
+
+    public float ActionValue=0;
 }

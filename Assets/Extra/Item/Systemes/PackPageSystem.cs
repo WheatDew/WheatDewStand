@@ -11,31 +11,46 @@ public class PackPageSystem : ComponentSystem
     {
         Entities.ForEach((PackPage packPage) => {
             packPageUI = packPage;
+            Debug.Log("PackPage Initialization Successful");
         });
     }
 
     protected override void OnUpdate()
     {
-        Entities.ForEach((CharacterPack characterPack,CharacterControllerStatus status) => {
-            if (status.isConscriptSelected&&characterPack.isDisplay&&!packPageUI.Display.activeSelf)
+        PackPageJob();
+
+        PackUIGroupJob();
+    }
+
+    public void PackPageJob()
+    {
+        Entities.ForEach((CharacterPack characterPack, CharacterControllerStatus status) => {
+            if (status.isConscriptSelected && packPageUI.Display.activeSelf)
             {
-                packPageUI.Display.SetActive(true);
                 int i = 0;
-                foreach(var item in characterPack.Pack)
+                foreach (var item in characterPack.Pack)
                 {
                     packPageUI.ItemList[i].gameObject.SetActive(true);
-                    packPageUI.ItemList[i].SetValue(item.Name, item.count);
+                    packPageUI.ItemList[i].SetValue(item.Key, item.Value);
                     i++;
                 }
             }
         });
+    }
 
+    public void PackUIGroupJob()
+    {
         Entities.ForEach((PackUIGroup packUIGroup) =>
         {
-            if(packUIGroup.command.Equals("Open"))
+            if (packUIGroup.command.Equals("Open"))
             {
-                packPageUI.Display.SetActive(true);
+                if (!packPageUI.Display.activeSelf)
+                    packPageUI.Display.SetActive(true);
+                else
+                    packPageUI.Display.SetActive(false);
+                packUIGroup.command = "";
             }
         });
     }
+
 }

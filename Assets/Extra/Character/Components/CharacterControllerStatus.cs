@@ -24,4 +24,5 @@ public class CharacterControllerStatus : MonoBehaviour
     public MeshRenderer StatusBubble;
 
     public GameObject StatusBubbleObject;
+
 }

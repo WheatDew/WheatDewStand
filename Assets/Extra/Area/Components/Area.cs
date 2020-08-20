@@ -9,4 +9,5 @@ public class Area : MonoBehaviour
     public HashSet<GameObject> CharacterOutside;
 
     public string CharacterActionAssign;
+    public string ItemGet;
 }

@@ -5,5 +5,5 @@ using UnityEngine;
 public class CharacterPack : MonoBehaviour
 {
     public bool isDisplay;
-    public HashSet<Item> Pack = new HashSet<Item>();
+    public Dictionary<string, int> Pack = new Dictionary<string, int>();
 }
