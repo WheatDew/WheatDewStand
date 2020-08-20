@@ -46,6 +46,35 @@ public class AreaSystem : ComponentSystem
                     characterStatus.ActionValue = 0;
                 }
             }
+
+            if (characterStatus.Action.Equals("料理"))
+            {
+                characterStatus.ActionValue += Time.DeltaTime;
+
+                if (characterStatus.ActionValue > 1)
+                {
+                    if (characterPack.Pack.ContainsKey("材料"))
+                    {
+                        characterPack.Pack["材料"]--;
+                        if (characterPack.Pack["材料"] == 0)
+                            characterPack.Pack.Remove("材料");
+                        if (characterPack.Pack.ContainsKey("食物"))
+                        {
+                            characterPack.Pack["食物"]++;
+                        }
+                        else
+                        {
+                            characterPack.Pack["食物"]--;
+                            if (characterPack.Pack["食物"] == 0)
+                                characterPack.Pack.Remove("食物");
+                        }
+                        Debug.Log("材料-1,食物+1");
+                    }
+                    else
+                        characterPack.Pack.Add("材料", 1);
+                    characterStatus.ActionValue = 0;
+                }
+            }
         });
     }
 }
