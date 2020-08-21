@@ -1,18 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PackButton : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public GameObject targetObj;
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        
+        GetComponent<Button>().onClick.AddListener(delegate
+        {
+            if (targetObj.activeSelf)
+                targetObj.SetActive(false);
+            else
+                targetObj.SetActive(true);
+        });
     }
 }

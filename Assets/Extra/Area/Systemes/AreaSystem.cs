@@ -17,64 +17,33 @@ public class AreaSystem : ComponentSystem
     protected override void OnUpdate()
     {
         Entities.ForEach((Area area) => {
-            foreach(var item in area.CharacterInside)
+
+            foreach (var item in area.CharacterOutside)
             {
-                item.GetComponent<CharacterStatus>().Action = area.CharacterActionAssign;
-            }
-            area.CharacterInside.Clear();
-            foreach(var item in area.CharacterOutside)
-            {
-                item.GetComponent<CharacterStatus>().Action = "";
+                CharacterArea chaAreaInfo = item.GetComponent<CharacterArea>();
+                CharacterStatus chaStatus = item.GetComponent<CharacterStatus>();
+                chaStatus.Action = "";
+                chaAreaInfo.AreaInside = "";
+                chaAreaInfo.AreaItemGetting = new string[0];
+                chaAreaInfo.AreaItemLosing = new string[0];
+                chaAreaInfo.AreaMultiplier = 1;
             }
             area.CharacterOutside.Clear();
+
+            foreach (var item in area.CharacterInside)
+            {
+                CharacterArea chaAreaInfo=item.GetComponent<CharacterArea>();
+                CharacterStatus chaStatus = item.GetComponent<CharacterStatus>();
+                chaStatus.Action = area.CharacterActionAssign;
+                chaAreaInfo.AreaInside = area.AreaName;
+                chaAreaInfo.AreaItemGetting = area.ItemGetting;
+                chaAreaInfo.AreaItemLosing = area.ItemLosing;
+                chaAreaInfo.ActionTimerInterval = area.TimerInterval;
+
+            }
+            area.CharacterInside.Clear();
+            
         });
 
-        Entities.ForEach((CharacterStatus characterStatus,CharacterPack characterPack) => {
-            if (characterStatus.Action.Equals("获取"))
-            {
-                characterStatus.ActionValue += Time.DeltaTime;
-
-                if (characterStatus.ActionValue > 1)
-                {
-                    if (characterPack.Pack.ContainsKey("材料"))
-                    {
-                        characterPack.Pack["材料"]++;
-                        Debug.Log("材料+1");
-                    }
-                    else
-                        characterPack.Pack.Add("材料", 1);
-                    characterStatus.ActionValue = 0;
-                }
-            }
-
-            if (characterStatus.Action.Equals("料理"))
-            {
-                characterStatus.ActionValue += Time.DeltaTime;
-
-                if (characterStatus.ActionValue > 1)
-                {
-                    if (characterPack.Pack.ContainsKey("材料"))
-                    {
-                        characterPack.Pack["材料"]--;
-                        if (characterPack.Pack["材料"] == 0)
-                            characterPack.Pack.Remove("材料");
-                        if (characterPack.Pack.ContainsKey("食物"))
-                        {
-                            characterPack.Pack["食物"]++;
-                        }
-                        else
-                        {
-                            characterPack.Pack["食物"]--;
-                            if (characterPack.Pack["食物"] == 0)
-                                characterPack.Pack.Remove("食物");
-                        }
-                        Debug.Log("材料-1,食物+1");
-                    }
-                    else
-                        characterPack.Pack.Add("材料", 1);
-                    characterStatus.ActionValue = 0;
-                }
-            }
-        });
     }
 }

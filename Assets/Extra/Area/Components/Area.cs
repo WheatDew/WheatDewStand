@@ -8,6 +8,9 @@ public class Area : MonoBehaviour
     public HashSet<GameObject> CharacterInside;
     public HashSet<GameObject> CharacterOutside;
 
+    public string AreaName;
     public string CharacterActionAssign;
-    public string ItemGet;
+    public string[] ItemGetting;
+    public string[] ItemLosing;
+    public float TimerInterval=1;
 }

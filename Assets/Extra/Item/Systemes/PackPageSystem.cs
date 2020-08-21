@@ -5,52 +5,40 @@ using Unity.Entities;
 
 public class PackPageSystem : ComponentSystem
 {
-    PackPage packPageUI;
+    PackPage packPage;
 
     protected override void OnStartRunning()
     {
         Entities.ForEach((PackPage packPage) => {
-            packPageUI = packPage;
+            this.packPage = packPage;
             Debug.Log("PackPage Initialization Successful");
         });
     }
 
     protected override void OnUpdate()
     {
-        PackPageJob();
-
-        PackUIGroupJob();
+        PackPageUpdateJob();
     }
 
-    public void PackPageJob()
+    public void PackPageUpdateJob()
     {
         Entities.ForEach((CharacterPack characterPack, CharacterControllerStatus status) => {
-            if (status.isConscriptSelected && packPageUI.Display.activeSelf)
+            if (status.isConscriptSelected && packPage.Display.activeSelf)
             {
                 int i = 0;
                 foreach (var item in characterPack.Pack)
                 {
-                    packPageUI.ItemList[i].gameObject.SetActive(true);
-                    packPageUI.ItemList[i].SetValue(item.Key, item.Value);
+                    packPage.ItemList[i].gameObject.SetActive(true);
+                    packPage.ItemList[i].SetValue(item.Key, item.Value);
                     i++;
                 }
             }
         });
     }
 
-    public void PackUIGroupJob()
+    public void PackButtonInitJob()
     {
-        Entities.ForEach((PackUIGroup packUIGroup) =>
-        {
-            if (packUIGroup.command.Equals("Open"))
-            {
-                if (!packPageUI.Display.activeSelf)
-                    packPageUI.Display.SetActive(true);
-                else
-                    packPageUI.Display.SetActive(false);
-                packUIGroup.command = "";
-            }
-        });
+        
     }
 
 }
