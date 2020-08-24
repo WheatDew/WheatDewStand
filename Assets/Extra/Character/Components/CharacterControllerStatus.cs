@@ -25,4 +25,6 @@ public class CharacterControllerStatus : MonoBehaviour
 
     public GameObject StatusBubbleObject;
 
+    
+
 }

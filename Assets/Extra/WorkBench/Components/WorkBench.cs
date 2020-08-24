@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WorkBench : MonoBehaviour
 {
-    public Transform WorkPosition;
+    public Vector3 WorkPosition;
     public string[] ItemGetting;
     public string[] ItemLosing;
     public float TimerInterval = 1;
