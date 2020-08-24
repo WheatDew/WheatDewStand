@@ -26,6 +26,7 @@ public class AreaSystem : ComponentSystem
                 chaAreaInfo.AreaInside = "";
                 chaAreaInfo.AreaItemGetting = new string[0];
                 chaAreaInfo.AreaItemLosing = new string[0];
+                chaAreaInfo.ActionTimer = 0;
                 chaAreaInfo.AreaMultiplier = 1;
             }
             area.CharacterOutside.Clear();
@@ -39,6 +40,7 @@ public class AreaSystem : ComponentSystem
                 chaAreaInfo.AreaItemGetting = area.ItemGetting;
                 chaAreaInfo.AreaItemLosing = area.ItemLosing;
                 chaAreaInfo.ActionTimerInterval = area.TimerInterval;
+                chaAreaInfo.ActionTimer = 0;
 
             }
             area.CharacterInside.Clear();

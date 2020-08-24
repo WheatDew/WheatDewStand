@@ -22,10 +22,16 @@ public class PackPageSystem : ComponentSystem
 
     public void PackPageUpdateJob()
     {
+
         Entities.ForEach((CharacterPack characterPack, CharacterControllerStatus status) => {
             if (status.isConscriptSelected && packPage.Display.activeSelf)
             {
                 int i = 0;
+                foreach(var item in packPage.ItemList)
+                {
+                    item.gameObject.SetActive(false);
+                }
+
                 foreach (var item in characterPack.Pack)
                 {
                     packPage.ItemList[i].gameObject.SetActive(true);

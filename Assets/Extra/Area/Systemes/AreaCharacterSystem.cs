@@ -11,6 +11,8 @@ public class AreaCharacterSystem : ComponentSystem
     protected override void OnUpdate()
     {
         Entities.ForEach((CharacterArea characterArea, CharacterPack characterPack) => {
+            characterArea.ActionTimer += Time.DeltaTime;
+
             if (characterArea.ActionTimer > characterArea.ActionTimerInterval)
             {
                 if(CharacerPackRemoveItem(characterPack,characterArea.AreaItemLosing))
@@ -19,7 +21,6 @@ public class AreaCharacterSystem : ComponentSystem
                 }
                 characterArea.ActionTimer = 0;
             }
-
         });
     }
 
@@ -60,6 +61,7 @@ public class AreaCharacterSystem : ComponentSystem
             else
                 return false;
         }
+        ua.Invoke();
         return true;
     }
 }
