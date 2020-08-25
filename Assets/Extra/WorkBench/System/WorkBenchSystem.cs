@@ -18,10 +18,5 @@ public class WorkBenchSystem : ComponentSystem
                     agent.destination = hit.collider.GetComponent<WorkBench>().WorkPosition;
             }
         });
-
-        
-
-    }
-
-    
+    } 
 }
