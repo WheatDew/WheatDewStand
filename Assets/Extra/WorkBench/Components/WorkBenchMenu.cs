@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WorkBenchMenu : MonoBehaviour
+public class WorkbenchMenu : MonoBehaviour
 {
-    public WorkBenchMenuItem[] workBenchMenuItemList;
+    public WorkbenchMenuItem[] workBenchMenuItemList;
 }

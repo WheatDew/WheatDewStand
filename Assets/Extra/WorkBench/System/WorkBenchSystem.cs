@@ -5,7 +5,7 @@ using Unity.Entities;
 using UnityEngine.AI;
 
 //[UpdateAfter(typeof(CharacterControllerStatusSystem))]
-public class WorkBenchSystem : ComponentSystem
+public class WorkbenchSystem : ComponentSystem
 {
     protected override void OnUpdate()
     {
@@ -15,7 +15,7 @@ public class WorkBenchSystem : ComponentSystem
                 RaycastHit hit;
                 if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100)
                 && hit.collider.gameObject.tag.Equals("WorkBench"))
-                    agent.destination = hit.collider.GetComponent<WorkBench>().WorkPosition;
+                    agent.destination = hit.collider.GetComponent<Workbench>().WorkPosition;
             }
         });
     } 

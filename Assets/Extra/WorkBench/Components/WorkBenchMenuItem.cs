@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class WorkBenchMenuItem : MonoBehaviour
+public class WorkbenchMenuItem : MonoBehaviour
 {
     private void Start()
     {
