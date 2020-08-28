@@ -28,7 +28,8 @@ public class WorkbenchMenuSystem : ComponentSystem
     {
         if (Input.GetMouseButtonDown(0))
         {
-            Entities.ForEach((Workbench workbench) =>
+            Entities
+                .ForEach((Workbench workbench) =>
             {
                 if (workbench.isOver)
                 {

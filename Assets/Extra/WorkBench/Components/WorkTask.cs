@@ -1,7 +1,7 @@
 ﻿
 public struct WorkTask
 {
-    string[] GettingList;
-    string[] LosingList;
-    float TimeCost;
+    public string[] GettingList;
+    public string[] LosingList;
+    public float TimeCost;
 }

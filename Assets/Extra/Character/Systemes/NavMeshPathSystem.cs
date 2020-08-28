@@ -19,7 +19,11 @@ public class NavMeshPathSystem : ComponentSystem
                 {
                     RaycastHit hit;
                     if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100))
+                    {
+                        if(hit.collider.tag=="Ground")
                         agent.destination = hit.point;
+                    }
+
                 }
             });
     }

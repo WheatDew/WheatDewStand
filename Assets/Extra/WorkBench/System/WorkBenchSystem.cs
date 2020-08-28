@@ -7,16 +7,37 @@ using UnityEngine.AI;
 //[UpdateAfter(typeof(CharacterControllerStatusSystem))]
 public class WorkbenchSystem : ComponentSystem
 {
+    private bool isGoingWorkbench;
+    private NavMeshAgent navMeshAgent;
+
     protected override void OnUpdate()
     {
-        Entities.ForEach((CharacterControllerStatus status, NavMeshAgent agent) => {
-            if (status.isConscriptSelected&&Input.GetMouseButtonDown(1))
-            {
-                RaycastHit hit;
-                if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100)
-                && hit.collider.gameObject.tag.Equals("WorkBench"))
-                    agent.destination = hit.collider.GetComponent<Workbench>().WorkPosition;
-            }
-        });
+        SetGoingWorkbenchCharacterJob();
+        CharacterGoingWorkbenchJob();
     } 
+
+    public void SetGoingWorkbenchCharacterJob()
+    {
+        if (Input.GetMouseButtonDown(1))
+            Entities.ForEach((CharacterControllerStatus status, NavMeshAgent agent) => {
+                if (status.isConscriptSelected)
+                {
+                    navMeshAgent = agent;
+                    isGoingWorkbench = true;
+                }
+            });
+    }
+
+    public void CharacterGoingWorkbenchJob()
+    {
+        if (isGoingWorkbench && navMeshAgent!=null)
+            Entities.ForEach((Workbench workbench) =>
+            {
+                if (workbench.isOver)
+                {
+                    navMeshAgent.destination =workbench.WorkPosition.position;
+                    isGoingWorkbench = false;
+                }
+            });
+    }
 }
