@@ -12,12 +12,18 @@ public class WorkbenchSystem : ComponentSystem
 
     protected override void OnUpdate()
     {
-        SetGoingWorkbenchCharacterJob();
-        CharacterGoingWorkbenchJob();
-    } 
+        
+    }
+
+    public void GetWorkbenchTaskListJob()
+    {
+        
+    }
 
     public void SetGoingWorkbenchCharacterJob()
     {
+        WorkbenchTaskData.CreateInstance();
+        Debug.Log(WorkbenchTaskData.GetTaskData("简单").TimeCost);
         if (Input.GetMouseButtonDown(1))
             Entities.ForEach((CharacterControllerStatus status, NavMeshAgent agent) => {
                 if (status.isConscriptSelected)
