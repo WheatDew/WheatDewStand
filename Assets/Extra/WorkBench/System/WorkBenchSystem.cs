@@ -10,6 +10,15 @@ public class WorkbenchSystem : ComponentSystem
     private bool isGoingWorkbench;
     private NavMeshAgent navMeshAgent;
 
+    private WorkbenchMenu workbenchMenu;
+
+    protected override void OnStartRunning()
+    {
+        Entities.ForEach((WorkbenchMenu workbenchMenu) => {
+            this.workbenchMenu = workbenchMenu;
+        });
+    }
+
     protected override void OnUpdate()
     {
         
@@ -17,7 +26,18 @@ public class WorkbenchSystem : ComponentSystem
 
     public void GetWorkbenchTaskListJob()
     {
-        
+        if(Input.GetMouseButtonDown(1))
+        Entities.ForEach((Workbench workbench) =>
+        {
+            if (workbench.isOver)
+            {
+                for(int i = 0; i < workbench.TaskName.Length; i++)
+                {
+                    workbenchMenu.workBenchMenuItemList[i].SetWorkbenchMenuItem(workbench.TaskName[i]);
+                    workbenchMenu.workBenchMenuItemList[i].gameObject.SetActive(true);
+                }
+            }
+        });
     }
 
     public void SetGoingWorkbenchCharacterJob()

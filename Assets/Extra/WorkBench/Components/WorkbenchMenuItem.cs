@@ -15,8 +15,8 @@ public class WorkbenchMenuItem : MonoBehaviour
         buttonContent = transform.GetChild(0).GetComponent<Text>();
     }
 
-    public void SetWorkbenchMenuItem()
+    public void SetWorkbenchMenuItem(string taskName)
     {
-
+        buttonContent.text = taskName;
     }
 }
