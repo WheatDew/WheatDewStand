@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class WorkbenchMenu : MonoBehaviour
 {
-    public WorkbenchMenuItem[] workbenchMenuItemList;
-    public RectTransform workbenchPosition;
+    public WorkbenchMenuController workbenchMenuController;
+    private void OnDisable()
+    {
+        foreach(var item in workbenchMenuController.workbenchMenuItemList)
+        {
+            item.gameObject.SetActive(false);
+        }
+    }
 }
