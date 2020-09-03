@@ -4,5 +4,6 @@ using UnityEngine;
 
 public class WorkbenchMenu : MonoBehaviour
 {
-    public WorkbenchMenuItem[] workBenchMenuItemList;
+    public WorkbenchMenuItem[] workbenchMenuItemList;
+    public RectTransform workbenchPosition;
 }

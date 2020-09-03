@@ -11,17 +11,22 @@ public class WorkbenchSystem : ComponentSystem
     private NavMeshAgent navMeshAgent;
 
     private WorkbenchMenu workbenchMenu;
+    private bool isWorkbenchMenuOpen;
 
     protected override void OnStartRunning()
     {
         Entities.ForEach((WorkbenchMenu workbenchMenu) => {
             this.workbenchMenu = workbenchMenu;
+            workbenchMenu.transform.GetChild(0).gameObject.SetActive(false);
+            foreach (var item in workbenchMenu.workbenchMenuItemList)
+                item.gameObject.SetActive(false);
+            isWorkbenchMenuOpen = false;
         });
     }
 
     protected override void OnUpdate()
     {
-        
+        GetWorkbenchTaskListJob();
     }
 
     public void GetWorkbenchTaskListJob()
@@ -29,12 +34,15 @@ public class WorkbenchSystem : ComponentSystem
         if(Input.GetMouseButtonDown(1))
         Entities.ForEach((Workbench workbench) =>
         {
+            Debug.Log("GetWorkbenchTaskListJob");
             if (workbench.isOver)
             {
+                workbenchMenu.workbenchPosition.position = Input.mousePosition;
+                workbenchMenu.workbenchPosition.gameObject.SetActive(true);
                 for(int i = 0; i < workbench.TaskName.Length; i++)
                 {
-                    workbenchMenu.workBenchMenuItemList[i].SetWorkbenchMenuItem(workbench.TaskName[i]);
-                    workbenchMenu.workBenchMenuItemList[i].gameObject.SetActive(true);
+                    workbenchMenu.workbenchMenuItemList[i].SetWorkbenchMenuItem(workbench.TaskName[i]);
+                    workbenchMenu.workbenchMenuItemList[i].gameObject.SetActive(true);
                 }
             }
         });
