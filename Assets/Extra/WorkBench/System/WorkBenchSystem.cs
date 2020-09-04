@@ -56,7 +56,6 @@ public class WorkbenchSystem : ComponentSystem
                         {
                             workbenchMenuController.workbenchMenuItemList[i].SetWorkbenchMenuItem(workbench.TaskName[i], workbench.WorkPosition,agent);
                             workbenchMenuController.workbenchMenuItemList[i].gameObject.SetActive(true);
-
                         }
                         isWorkbenchMenuOpen = true;
                     }
