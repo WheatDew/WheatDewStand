@@ -22,11 +22,11 @@ public class WorkbenchTaskData
         if (Lib == null)
         {
             Lib = new Dictionary<string, WorkTask>();
-            Lib.Add("简单", NewWorkTask(1, 1, "材料", "食物"));
+            Lib.Add("简单", NewWorkTask("料理",1, 1, "材料", "食物"));
         }
     }
 
-    private static WorkTask NewWorkTask(float costTime, int materialsLength, params string[] items)
+    private static WorkTask NewWorkTask(string ActionName, float costTime, int materialsLength, params string[] items)
     {
         string[] materials = new string[materialsLength];
         for (int i = 0; i < materialsLength; i++)
@@ -38,6 +38,6 @@ public class WorkbenchTaskData
         {
             products[i] = items[i + materialsLength];
         }
-        return new WorkTask { GettingList = products, LosingList = materials, TimeCost = costTime };
+        return new WorkTask { ActionName=ActionName, GettingList = products, LosingList = materials, TimeCost = costTime };
     }
 }

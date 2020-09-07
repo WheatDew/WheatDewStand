@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using Unity.Entities;
 using UnityEngine.AI;
+using UnityEngine.Events;
 
 //[UpdateAfter(typeof(CharacterControllerStatusSystem))]
 public class WorkbenchSystem : ComponentSystem
 {
-    private bool isGoingWorkbench;
-    private NavMeshAgent navMeshAgent;
 
     private WorkbenchMenuController workbenchMenuController;
     private bool isWorkbenchMenuOpen;
@@ -46,7 +45,7 @@ public class WorkbenchSystem : ComponentSystem
             Debug.Log("GetWorkbenchTaskListJob");
             if (workbench.isOver)
             {
-                Entities.ForEach((CharacterControllerStatus status, NavMeshAgent agent) => {
+                Entities.ForEach((CharacterControllerStatus status, NavMeshAgent agent,CharacterStatus characterStatus,CharacterWorkbenchInfo workbenchInfo) => {
                     if (status.isConscriptSelected)
                     {
                         workbenchMenuController.workbenchPosition.position = Input.mousePosition;
@@ -54,7 +53,14 @@ public class WorkbenchSystem : ComponentSystem
 
                         for (int i = 0; i < workbench.TaskName.Length; i++)
                         {
-                            workbenchMenuController.workbenchMenuItemList[i].SetWorkbenchMenuItem(workbench.TaskName[i], workbench.WorkPosition,agent);
+                            UnityAction unityAction = delegate {
+                                characterStatus.Action = WorkbenchTaskData.GetTaskData(workbench.TaskName[i]).ActionName;
+                                agent.destination = workbench.WorkPosition.position;
+                            };
+
+                            workbenchInfo.WorkingName = workbench.TaskName[i];
+                            workbenchInfo.WorkingPosition = workbench.WorkPosition;
+                            workbenchMenuController.workbenchMenuItemList[i].SetWorkbenchMenuItem(workbench.TaskName[i],unityAction );
                             workbenchMenuController.workbenchMenuItemList[i].gameObject.SetActive(true);
                         }
                         isWorkbenchMenuOpen = true;
@@ -64,30 +70,21 @@ public class WorkbenchSystem : ComponentSystem
         });
     }
 
-    public void SetGoingWorkbenchCharacterJob()
+    public void WorkbenchSetWorkingJob()
     {
-        WorkbenchTaskData.CreateInstance();
-        Debug.Log(WorkbenchTaskData.GetTaskData("简单").TimeCost);
-        if (Input.GetMouseButtonDown(1))
-            Entities.ForEach((CharacterControllerStatus status, NavMeshAgent agent) => {
-                if (status.isConscriptSelected)
+        Entities.ForEach((CharacterStatus status,CharacterWorkbenchInfo workbenchInfo,CharacterPack characterPack,Transform transform) =>
+        {
+            if (transform.position == workbenchInfo.WorkingPosition.position)
+            {
+                workbenchInfo.Timer += Time.DeltaTime;
+                if (workbenchInfo.Timer > workbenchInfo.TaskTimeCost)
                 {
-                    navMeshAgent = agent;
-                    isGoingWorkbench = true;
+                    characterPack.ItemChangeTaskList.Add(new ItemChangeTask { 
+
+                    });
                 }
-            });
+            }
+        });
     }
 
-    public void CharacterGoingWorkbenchJob()
-    {
-        if (isGoingWorkbench && navMeshAgent!=null)
-            Entities.ForEach((Workbench workbench) =>
-            {
-                if (workbench.isOver)
-                {
-                    navMeshAgent.destination =workbench.WorkPosition.position;
-                    isGoingWorkbench = false;
-                }
-            });
-    }
 }
