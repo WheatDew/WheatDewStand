@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class PackPage : MonoBehaviour
 {
-    public bool IsOpen;
+    public Stack<PackPageTask> packPageTaskList = new Stack<PackPageTask>();
+    public bool Open;
     public GameObject Display;
     public PackPageItem[] ItemList;
     public List<string> ItemAdd = new List<string>();

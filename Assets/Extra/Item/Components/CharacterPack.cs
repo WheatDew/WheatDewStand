@@ -5,6 +5,6 @@ using UnityEngine;
 public class CharacterPack : MonoBehaviour
 {
     public bool isDisplay;
-    public List<ItemChangeTask> ItemChangeTaskList = new List<ItemChangeTask>();
+    public Stack<ItemTask> ItemChangeTaskList = new Stack<ItemTask>();
     public Dictionary<string, int> Pack = new Dictionary<string, int>();
 }

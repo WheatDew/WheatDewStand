@@ -10,9 +10,10 @@ public class CharacterPackSystem : ComponentSystem
     {
         Entities.ForEach((CharacterPack characterPack) =>
         {
-            foreach(var task in characterPack.ItemChangeTaskList)
+            while (characterPack.ItemChangeTaskList.Count>0)
             {
-                if(CharacterPackRemoveItem(characterPack, task.Losing))
+                var task = characterPack.ItemChangeTaskList.Pop();
+                if(CharacterPackRemoveItem(characterPack,task.Losing))
                     CharacterPackAddItem(characterPack, task.Getting);
             }
         });

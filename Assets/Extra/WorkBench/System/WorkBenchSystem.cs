@@ -42,7 +42,6 @@ public class WorkbenchSystem : ComponentSystem
         if(Input.GetMouseButtonDown(1))
         Entities.ForEach((Workbench workbench) =>
         {
-            Debug.Log("GetWorkbenchTaskListJob");
             if (workbench.isOver)
             {
                 Entities.ForEach((CharacterControllerStatus status, NavMeshAgent agent,CharacterStatus characterStatus,CharacterWorkbenchInfo workbenchInfo) => {
@@ -53,14 +52,14 @@ public class WorkbenchSystem : ComponentSystem
 
                         for (int i = 0; i < workbench.TaskName.Length; i++)
                         {
-                            UnityAction unityAction = delegate {
-                                characterStatus.Action = WorkbenchTaskData.GetTaskData(workbench.TaskName[i]).ActionName;
+                            UnityAction<string,Transform> unityAction = delegate {
+                                characterStatus.Action = WorkbenchTaskData.GetTaskData(string.Copy(workbench.TaskName[i])).ActionName;
                                 agent.destination = workbench.WorkPosition.position;
                             };
 
                             workbenchInfo.WorkingName = workbench.TaskName[i];
                             workbenchInfo.WorkingPosition = workbench.WorkPosition;
-                            workbenchMenuController.workbenchMenuItemList[i].SetWorkbenchMenuItem(workbench.TaskName[i],unityAction );
+                            workbenchMenuController.workbenchMenuItemList[i].SetWorkbenchMenuItem(workbench.TaskName[i], unityAction);
                             workbenchMenuController.workbenchMenuItemList[i].gameObject.SetActive(true);
                         }
                         isWorkbenchMenuOpen = true;
@@ -79,8 +78,9 @@ public class WorkbenchSystem : ComponentSystem
                 workbenchInfo.Timer += Time.DeltaTime;
                 if (workbenchInfo.Timer > workbenchInfo.TaskTimeCost)
                 {
-                    characterPack.ItemChangeTaskList.Add(new ItemChangeTask { 
-
+                    characterPack.ItemChangeTaskList.Push(new ItemTask { 
+                        Getting=WorkbenchTaskData.GetTaskData(workbenchInfo.WorkingName).GettingList,
+                        Losing=WorkbenchTaskData.GetTaskData(workbenchInfo.WorkingName).LosingList
                     });
                 }
             }

@@ -4,20 +4,30 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 using UnityEngine.AI;
+using System;
 
 public class WorkbenchMenuItem : MonoBehaviour
 {
-    private UnityAction ua;
+    private UnityAction<string,Transform> ua;
     public Text buttonContent;
+    string workTaskName;
+    Transform workingPosition;
 
-    public void SetWorkbenchMenuItem(string taskName,UnityAction task)
-    {
-        buttonContent.text = taskName;
-        ua = task;
-    }
 
     public void ClickEvent()
     {
-        ua?.Invoke();
+        if (workTaskName != null && workingPosition != null)
+        {
+            ua?.Invoke(workTaskName, workingPosition);
+            workTaskName = null;
+            workingPosition = null;
+        }
+
+    }
+
+    internal void SetWorkbenchMenuItem(string ButtonText,UnityAction<string,Transform> Behaviour)
+    {
+        buttonContent.text = ButtonText;
+        ua = Behaviour;
     }
 }
