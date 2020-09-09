@@ -8,7 +8,6 @@ using UnityEngine.Events;
 //[UpdateAfter(typeof(CharacterControllerStatusSystem))]
 public class WorkbenchSystem : ComponentSystem
 {
-
     private WorkbenchMenuController workbenchMenuController;
     private bool isWorkbenchMenuOpen;
 
@@ -69,7 +68,7 @@ public class WorkbenchSystem : ComponentSystem
     {
         Entities.ForEach((CharacterStatus status,CharacterWorkbenchInfo workbenchInfo,CharacterPack characterPack,Transform transform) =>
         {
-            if (transform.position == workbenchInfo.WorkingPosition.position)
+            if (workbenchInfo.WorkingPosition!=null && transform.position == workbenchInfo.WorkingPosition.position)
             {
                 workbenchInfo.Timer += Time.DeltaTime;
                 if (workbenchInfo.Timer > workbenchInfo.TaskTimeCost)

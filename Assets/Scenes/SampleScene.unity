@@ -3680,7 +3680,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8ae7df76eaabcf4db4a9c9dcfb6bafc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsOpen: 0
+  Open: 0
   Display: {fileID: 1837082966}
   ItemList:
   - {fileID: 1776805553}
@@ -6641,7 +6641,7 @@ GameObject:
   - component: {fileID: 1064594151}
   m_Layer: 0
   m_Name: FoodMaterialArea
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
