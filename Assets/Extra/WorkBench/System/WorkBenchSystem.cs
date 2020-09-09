@@ -52,14 +52,10 @@ public class WorkbenchSystem : ComponentSystem
 
                         for (int i = 0; i < workbench.TaskName.Length; i++)
                         {
-                            UnityAction<string,Transform> unityAction = delegate {
-                                characterStatus.Action = WorkbenchTaskData.GetTaskData(string.Copy(workbench.TaskName[i])).ActionName;
-                                agent.destination = workbench.WorkPosition.position;
-                            };
 
                             workbenchInfo.WorkingName = workbench.TaskName[i];
                             workbenchInfo.WorkingPosition = workbench.WorkPosition;
-                            workbenchMenuController.workbenchMenuItemList[i].SetWorkbenchMenuItem(workbench.TaskName[i], unityAction);
+                            workbenchMenuController.workbenchMenuItemList[i].SetWorkbenchMenuItem(workbench.TaskName[i],workbench.WorkPosition,characterStatus, agent, WorkbenchMenuItemClick);
                             workbenchMenuController.workbenchMenuItemList[i].gameObject.SetActive(true);
                         }
                         isWorkbenchMenuOpen = true;
@@ -85,6 +81,13 @@ public class WorkbenchSystem : ComponentSystem
                 }
             }
         });
+    }
+
+    public void WorkbenchMenuItemClick(string workTaskName,Transform workingPosition,CharacterStatus characterStatus,NavMeshAgent agent)
+    {
+        WorkbenchTaskData.CreateInstance();
+        characterStatus.Action = WorkbenchTaskData.GetTaskData(workTaskName).ActionName;
+        agent.destination = workingPosition.position;
     }
 
 }
