@@ -14,6 +14,7 @@ public class CCharacterBasicModule : MonoBehaviour
         // Create entity prefab from the game object hierarchy once
         var settings = GameObjectConversionSettings.FromWorld(World.DefaultGameObjectInjectionWorld, null);
         var prefab = GameObjectConversionUtility.ConvertGameObjectHierarchy(Prefab, settings);
+        
         var entityManager = World.DefaultGameObjectInjectionWorld.EntityManager;
 
         // Efficiently instantiate a bunch of entities from the already converted entity prefab

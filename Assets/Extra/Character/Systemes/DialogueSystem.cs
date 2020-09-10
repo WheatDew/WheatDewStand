@@ -70,11 +70,11 @@ public class DialogueSystem : ComponentSystem
 
     private void UpdataDialogueBoxJob()
     {
-        //控制显示和隐藏
-        m_dialogueBox.transform.localScale = (m_dialogueBox.isDisplay) ? Vector3.one : Vector3.zero;
+        ////控制显示和隐藏
+        //m_dialogueBox.transform.localScale = (m_dialogueBox.isDisplay) ? Vector3.one : Vector3.zero;
 
-        //控制内容
-        m_dialogueBox.DisplayContent.text = m_dialogueBox.Content;
+        ////控制内容
+        //m_dialogueBox.DisplayContent.text = m_dialogueBox.Content;
 
     }
 }
