@@ -322,10 +322,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 826300193}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6a168048065419146a0b51497acfe87d, type: 3}
+  m_Script: {fileID: 11500000, guid: 119ff79ea88e593408f19bfa2faaa996, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterPrefabOrigin: {fileID: 5215480770581620061, guid: 3ac0f8d83ec2d094898555d837ac062a,
+  CharacterBasicModulePrefab: {fileID: 2843687331842539305, guid: 970aecec1ec33664caf2d041e6ef6780,
     type: 3}
 --- !u!4 &826300195
 Transform:

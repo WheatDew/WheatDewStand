@@ -11,7 +11,6 @@ public class CharacterBasicSpawner : MonoBehaviour
 
     void Start()
     {
-
         var settings = GameObjectConversionSettings.FromWorld(World.DefaultGameObjectInjectionWorld, null);
         var prefab = GameObjectConversionUtility.ConvertGameObjectHierarchy(characterPrefabOrigin, settings);
         var entityManager = World.DefaultGameObjectInjectionWorld.EntityManager;
