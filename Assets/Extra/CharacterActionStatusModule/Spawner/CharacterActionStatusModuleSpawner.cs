@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Entities;
 
 public class CharacterActionStatusModuleSpawner : MonoBehaviour
 {
@@ -11,5 +12,6 @@ public class CharacterActionStatusModuleSpawner : MonoBehaviour
     {
         CharacterActionStatusModuleNormalSpawnerExpansion spawnerExpansion = Instantiate(spawnerExpansionPrefab, transform);
         CharacterActionStatusModuleFileIO fileIO = Instantiate(fileIOPrefab, transform);
+        World.DefaultGameObjectInjectionWorld.GetExistingSystem<SCharacterActionStatus>().fileIO = fileIO;
     }
 }

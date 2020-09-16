@@ -9,7 +9,7 @@ public class SCharacterActionStatus : ComponentSystem
 
     protected override void OnStartRunning()
     {
-        //TODO 添加文件字典
+        
     }
     protected override void OnUpdate()
     {
