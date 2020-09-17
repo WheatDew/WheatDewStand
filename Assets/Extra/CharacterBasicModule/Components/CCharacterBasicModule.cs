@@ -7,5 +7,5 @@ using UnityEngine;
 
 public class CCharacterBasicModule : MonoBehaviour
 {
-    
+    public bool isSelected;
 }
