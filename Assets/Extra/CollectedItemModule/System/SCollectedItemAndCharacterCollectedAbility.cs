@@ -8,25 +8,28 @@ public class SCollectedItemAndCharacterCollectedAbility : ComponentSystem
     public CollectedItemMenuController collectedItemMenuController;
     protected override void OnUpdate()
     {
-        
+        OpenCollectedItemMenuJob();
     }
 
     public void OpenCollectedItemMenuJob()
     {
+
         if (Input.GetMouseButtonDown(1))
         {
-            if (Input.GetMouseButtonDown(1))
+            RaycastHit raycastInfo;
+            Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out raycastInfo);
+            bool correctClickedFlag = false;
+            Entities.ForEach((CCollectedItem collectedItem) =>
             {
-                RaycastHit raycastInfo;
-                Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out raycastInfo);
-
-                Entities.ForEach((CCharacterCollectedAbility characterCollectedAbility) => {
-                    if (characterCollectedAbility.gameObject == raycastInfo.collider.gameObject)
-                    {
-                        collectedItemMenuController.gameObject.SetActive(true);
-                    }
-                });
-            }
+                if (collectedItem.gameObject == raycastInfo.collider.gameObject)
+                {
+                    collectedItemMenuController.gameObject.SetActive(true);
+                    correctClickedFlag = true;
+                }
+            });
+            if(!correctClickedFlag)
+                collectedItemMenuController.gameObject.SetActive(false);
         }
+
     }
 }

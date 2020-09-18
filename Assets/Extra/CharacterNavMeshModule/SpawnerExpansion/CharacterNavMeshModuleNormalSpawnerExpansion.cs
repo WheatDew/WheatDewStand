@@ -10,6 +10,6 @@ public class CharacterNavMeshModuleNormalSpawnerExpansion : MonoBehaviour
         GameObject CharacterBasicModulePrefab = FindObjectOfType<CharacterBasicModuleNormalSpawner>().CharacterBasicModulePrefab;
         NavMeshAgent navMeshAgent= CharacterBasicModulePrefab.AddComponent<NavMeshAgent>();
         navMeshAgent.baseOffset = 0;
-
+        navMeshAgent.angularSpeed = 0;
     }
 }
