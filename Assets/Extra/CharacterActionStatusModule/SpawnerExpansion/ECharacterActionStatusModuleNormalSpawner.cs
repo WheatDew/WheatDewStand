@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterActionStatusModuleNormalSpawnerExpansion : MonoBehaviour
+public class ECharacterActionStatusModuleNormalSpawner : MonoBehaviour
 {
     public CharacterActionStatusBubble characterActionStatusBubblePrefab;
 

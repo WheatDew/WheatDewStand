@@ -5,12 +5,12 @@ using Unity.Entities;
 
 public class CharacterActionStatusModuleSpawner : MonoBehaviour
 {
-    public CharacterActionStatusModuleNormalSpawnerExpansion spawnerExpansionPrefab;
+    public ECharacterActionStatusModuleNormalSpawner spawnerExpansionPrefab;
     public CharacterActionStatusModuleFileIO fileIOPrefab;
 
     private void Start()
     {
-        CharacterActionStatusModuleNormalSpawnerExpansion spawnerExpansion = Instantiate(spawnerExpansionPrefab, transform);
+        ECharacterActionStatusModuleNormalSpawner spawnerExpansion = Instantiate(spawnerExpansionPrefab, transform);
         CharacterActionStatusModuleFileIO fileIO = Instantiate(fileIOPrefab, transform);
         World.DefaultGameObjectInjectionWorld.GetExistingSystem<SCharacterActionStatus>().fileIO = fileIO;
     }

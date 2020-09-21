@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CharacterNavMeshModuleSpawner : MonoBehaviour
 {
-    public CharacterNavMeshModuleNormalSpawnerExpansion spawnerExpansion;
+    public ECharacterNavMeshModuleNormalSpawner spawnerExpansion;
 
     private void Start()
     {

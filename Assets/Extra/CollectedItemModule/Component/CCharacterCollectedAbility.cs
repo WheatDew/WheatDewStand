@@ -6,4 +6,5 @@ public class CCharacterCollectedAbility : MonoBehaviour
 {
     public float CollectedAbility;
     public CCollectedItem CollectedItemTarget;
+    
 }
