@@ -550,7 +550,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   collectedItemModelUIGroup: {fileID: 7597027868977109680, guid: 0b9f34af758fd5a4f95faf79e8127c59,
     type: 3}
-  collectedItemModelSpawnerExpansion: {fileID: 0}
+  collectedItemModelSpawnerExpansion: {fileID: 1699966274001514232, guid: 3311dce000df72040837219729f662bf,
+    type: 3}
   CollectedItemPrefab: {fileID: 8820535752105419172, guid: 71753397548acb14fa0f2fd187a3c9d1,
     type: 3}
 --- !u!1 &2331025949095968074
