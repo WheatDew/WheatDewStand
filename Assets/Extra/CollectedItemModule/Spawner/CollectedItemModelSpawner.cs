@@ -6,6 +6,8 @@ public class CollectedItemModelSpawner : MonoBehaviour
 {
     [SerializeField]
     private CollectedItemModelUIGroup collectedItemModelUIGroup;
+    [SerializeField]
+    private ECollectedItemModel collectedItemModelSpawnerExpansion;
     [System.NonSerialized]
     public CollectedItemModelUIGroup currentCollectedItemModelUIGroup;
     [SerializeField]
@@ -14,6 +16,7 @@ public class CollectedItemModelSpawner : MonoBehaviour
     private void Start()
     {
         currentCollectedItemModelUIGroup = Instantiate(collectedItemModelUIGroup);
+        ECollectedItemModel tempSpawnerExpansion = Instantiate(collectedItemModelSpawnerExpansion);
     }
 
     private void Update()

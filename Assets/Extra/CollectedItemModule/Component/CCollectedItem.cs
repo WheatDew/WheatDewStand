@@ -4,6 +4,6 @@ using UnityEngine;
 
 public class CCollectedItem : MonoBehaviour
 {
-    [System.NonSerialized]
-    public CCharacterCollectedAbility characterCollectedAbilityTarget;
+    public int ResourceID;
+    public int TotalCount;
 }

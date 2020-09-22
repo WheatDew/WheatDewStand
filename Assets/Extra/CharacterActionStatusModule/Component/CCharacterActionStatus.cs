@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class CCharacterActionStatus : MonoBehaviour
 {
-    public string CurrentActionStatus;
+    public int CurrentActionStatus;
     public CharacterActionStatusBubble characterActionStatusBubble;
-
 }

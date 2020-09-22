@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CharacterActionStatusModuleFileIO : MonoBehaviour
 {
-    public Dictionary<string, Texture> SpriteAssetsList = new Dictionary<string, Texture>();
+    public Dictionary<int, Texture> SpriteAssetsList = new Dictionary<int, Texture>();
 
     public Texture[] VirtualFileGroup;
 
@@ -15,9 +15,9 @@ public class CharacterActionStatusModuleFileIO : MonoBehaviour
 
     public void VirtualReadFile()
     {
-        foreach(var item in VirtualFileGroup)
+        for(int i = 0; i < VirtualFileGroup.Length; i++)
         {
-            SpriteAssetsList.Add(item.name, item);
+            SpriteAssetsList.Add(i, VirtualFileGroup[i]);
         }
     }
 }
