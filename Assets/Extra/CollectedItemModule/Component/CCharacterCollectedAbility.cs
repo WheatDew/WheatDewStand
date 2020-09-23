@@ -6,5 +6,6 @@ public class CCharacterCollectedAbility : MonoBehaviour
 {
     public float CollectedAbility;
     public CCollectedItem CollectedItemTarget;
-    
+    public float timer;
+    public float workTime;
 }

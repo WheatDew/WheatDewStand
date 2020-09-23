@@ -14,6 +14,21 @@ public class SCollectedItemAndCharacterCollectedAbility : ComponentSystem
         OpenCollectedItemMenuJob();
     }
 
+    public void CollectingItemJob()
+    {
+        Entities.ForEach((CCharacterActionStatus actionStatus,CCharacterCollectedAbility collectedAbility,CCharacterPack pack) =>
+        {
+            if(actionStatus.CurrentActionStatus==3&&collectedAbility.CollectedItemTarget!=null)
+            {
+                collectedAbility.timer += Time.DeltaTime;
+                if (collectedAbility.timer > collectedAbility.workTime)
+                {
+                    pack.TaskList.Push(new TCharacterPack { Getting = new string[1] { "桃子" }, Losing = new string[0] { } });
+                }
+            }
+        });
+    }
+
     public void TargetCollectedItem()
     {
         Entities.ForEach((Transform transform, CCharacterCollectedAbility CCA,NavMeshAgent NMA,CCharacterActionStatus CAS) =>
@@ -21,16 +36,20 @@ public class SCollectedItemAndCharacterCollectedAbility : ComponentSystem
             if (CCA.CollectedItemTarget != null)
             {
 
-                if (Vector3.Distance(transform.position, CCA.CollectedItemTarget.transform.position) > 1.5f)
+                if (Vector3.Distance(transform.position, CCA.CollectedItemTarget.transform.position) > 0.5f)
                 {
 
                     if (CCA.CollectedItemTarget.transform.position != CCA.CollectedItemTarget.transform.position - (CCA.CollectedItemTarget.transform.position - transform.position).normalized * 1.5f)
-                        NMA.destination = CCA.CollectedItemTarget.transform.position- (CCA.CollectedItemTarget.transform.position - transform.position).normalized * 1.5f;
+                        NMA.destination = CCA.CollectedItemTarget.transform.position- (CCA.CollectedItemTarget.transform.position - transform.position).normalized * 0.5f;
                 }
                 else
                 {
                     if (CAS.CurrentActionStatus == 0)
+                    {
                         CAS.CurrentActionStatus = 3;
+
+                    }
+
                 }
                 
             }
