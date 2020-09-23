@@ -7,5 +7,7 @@ using UnityEngine;
 
 public class CCharacterBasicModule : MonoBehaviour
 {
+    public string Name;
     public bool isSelected;
+    public MeshRenderer meshRenderer;
 }

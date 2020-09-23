@@ -24,8 +24,11 @@ public class CharacterBasicModuleNormalSpawner : MonoBehaviour
     public void Update()
     {
         //测试
-        if(Input.GetKeyDown(KeyCode.F))
-        CreateCharacterBasicModule();
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            CreateCharacterBasicModule();
+        }
+
     }
 
     public void TestInitialization()

@@ -94,7 +94,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46ca4eb18cf7c2846baa6a61c8e5db30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Name: siro
   isSelected: 0
+  meshRenderer: {fileID: 2843687332086641006}
 --- !u!114 &9113313151349917871
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -135,8 +137,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2843687332086641001}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: 0}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
+  m_LocalPosition: {x: 0, y: 0.1, z: 0}
+  m_LocalScale: {x: 0.1, y: 0.1, z: -0.1}
   m_Children: []
   m_Father: {fileID: 2843687331842539298}
   m_RootOrder: 0
@@ -167,7 +169,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 422f3b7556f2aee48a2945184d31842f, type: 2}
+  - {fileID: 2100000, guid: 9bd982f2cc34a2941923c948de67ecbe, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
