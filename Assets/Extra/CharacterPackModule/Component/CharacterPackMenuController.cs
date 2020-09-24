@@ -11,6 +11,7 @@ public class CharacterPackMenuController : MonoBehaviour
 
     public void CreateItem(string buttonName)
     {
+        Debug.Log("创建按钮");
         CharacterPackMenuItem collectedItemMenuItem = Instantiate(characterPackMenuItemPrefab, itemParent);
         collectedItemMenuItem.Initialization(buttonName);
     }

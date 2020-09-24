@@ -5,11 +5,11 @@ using Unity.Entities;
 
 public class CharacterPackModuleUIGroup : MonoBehaviour
 {
-    public CollectedItemMenuController collectedItemMenuController;
+    public CharacterPackMenuController characterPackMenuController;
 
     private void Start()
     {
-        World.DefaultGameObjectInjectionWorld.GetExistingSystem<SCollectedItemAndCharacterCollectedAbility>()
-            .collectedItemMenuController = collectedItemMenuController;
+        World.DefaultGameObjectInjectionWorld.GetExistingSystem<SCharacterPack>()
+            .characterPackController = characterPackMenuController;
     }
 }

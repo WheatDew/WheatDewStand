@@ -12,6 +12,7 @@ public class SCollectedItemAndCharacterCollectedAbility : ComponentSystem
     {
         TargetCollectedItem();
         OpenCollectedItemMenuJob();
+        CollectingItemJob();
     }
 
     public void CollectingItemJob()
@@ -24,6 +25,7 @@ public class SCollectedItemAndCharacterCollectedAbility : ComponentSystem
                 if (collectedAbility.timer > collectedAbility.workTime)
                 {
                     pack.TaskList.Push(new TCharacterPack { Getting = new string[1] { "桃子" }, Losing = new string[0] { } });
+                    collectedAbility.timer = 0;
                 }
             }
         });

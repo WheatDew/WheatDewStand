@@ -4,15 +4,14 @@ using UnityEngine;
 
 public class CharacterPackModuleSpawner : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField]
+    private GameObject CharacterPackModuleUIGroupPrefab;
+    [SerializeField]
+    private GameObject CharacterPackModuleSpawnerExpansionPrefab;
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        
+        GameObject characterPackModuleUIGroup = Instantiate(CharacterPackModuleUIGroupPrefab, transform);
+        GameObject characterPackModuleSpawnerExpansion = Instantiate(CharacterPackModuleSpawnerExpansionPrefab, transform);
     }
 }

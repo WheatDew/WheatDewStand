@@ -5,12 +5,14 @@ using UnityEngine;
 public class CameraModuleSpawner : MonoBehaviour
 {
     [SerializeField]
-    public DepressionAngleCamera depressionAngleCamera;
+    private DepressionAngleCamera depressionAngleCamera;
     [System.NonSerialized]
-    private DepressionAngleCamera currentDepressionAngleCamera;
+    public DepressionAngleCamera currentDepressionAngleCamera;
 
     private void Start()
     {
         currentDepressionAngleCamera = Instantiate(depressionAngleCamera);
     }
+
+
 }
