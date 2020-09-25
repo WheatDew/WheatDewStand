@@ -43,16 +43,21 @@ public class SCharacterPack : ComponentSystem
                 {
                     tempItemList.Add(new TempItem { Name = item.Key, Value = item.Value });
                 }
-                foreach (var item in characterPackController.characterPackMenuItemList)
+                for (int i = 0; i < characterPackController.characterPackMenuItemList.Length; i++)
                 {
-                    item.gameObject.SetActive(false);
-                }
-                for (int i = 0; i < tempItemList.Count; i++)
-                {
-                    characterPackController.characterPackMenuItemList[i].buttonText.text = tempItemList[i].Name;
-                    characterPackController.characterPackMenuItemList[i].countText.text = tempItemList[i].Value.ToString();
-                    characterPackController.characterPackMenuItemList[i].characterBasicModule = basic;
-                    characterPackController.characterPackMenuItemList[i].gameObject.SetActive(true);
+                    //因为dictionary是没有顺序的，如果点击按钮的途中添加按钮会出现问题，推荐是用stack
+                    if (i < pack.Pack.Count)
+                    {
+                        characterPackController.characterPackMenuItemList[i].buttonText.text = tempItemList[i].Name;
+                        characterPackController.characterPackMenuItemList[i].countText.text = tempItemList[i].Value.ToString();
+                        characterPackController.characterPackMenuItemList[i].characterBasicModule = basic;
+                        characterPackController.characterPackMenuItemList[i].characterPack = pack;
+                        characterPackController.characterPackMenuItemList[i].gameObject.SetActive(true);
+                    }
+                    else
+                    {
+                        characterPackController.characterPackMenuItemList[i].gameObject.SetActive(false);
+                    }
                 }
             }
 
@@ -106,7 +111,6 @@ public class SCharacterPack : ComponentSystem
     {
         if (items.Length == 0)
         {
-            Debug.Log("空消耗");
             return true;
         }
         UnityAction ua = delegate { };

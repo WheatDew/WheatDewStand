@@ -15,7 +15,7 @@ public class CollectedItemModelSpawner : MonoBehaviour
 
     private void Start()
     {
-        currentCollectedItemModelUIGroup = Instantiate(collectedItemModelUIGroup);
+        currentCollectedItemModelUIGroup = Instantiate(collectedItemModelUIGroup,FindObjectOfType<Canvas>().transform);
         ECollectedItemModel tempSpawnerExpansion = Instantiate(collectedItemModelSpawnerExpansion);
     }
 

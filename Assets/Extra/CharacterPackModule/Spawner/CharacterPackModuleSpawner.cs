@@ -11,7 +11,7 @@ public class CharacterPackModuleSpawner : MonoBehaviour
 
     private void Start()
     {
-        GameObject characterPackModuleUIGroup = Instantiate(CharacterPackModuleUIGroupPrefab, transform);
+        GameObject characterPackModuleUIGroup = Instantiate(CharacterPackModuleUIGroupPrefab,FindObjectOfType<Canvas>().transform);
         GameObject characterPackModuleSpawnerExpansion = Instantiate(CharacterPackModuleSpawnerExpansionPrefab, transform);
     }
 }

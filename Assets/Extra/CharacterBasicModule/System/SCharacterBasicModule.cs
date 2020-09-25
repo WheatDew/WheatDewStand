@@ -25,7 +25,15 @@ public class SCharacterBasicModule : ComponentSystem
                 Entities.ForEach((CCharacterBasicModule characterBasic) =>
                 {
                     characterBasic.isSelected = false;
-                    if (raycastHit.collider&&characterBasic.gameObject == raycastHit.collider.transform.parent.gameObject)
+                    if (characterBasic == null)
+                    {
+                        Debug.Log("characterBasic is empty");
+                    }
+                    if (raycastHit.collider.transform.parent.gameObject == null)
+                    {
+                        Debug.Log("raycastHit.collider.transform.parent.gameObjec is empty");
+                    }
+                    if (characterBasic.gameObject == raycastHit.collider.transform.parent.gameObject)
                     {
                         characterBasic.isSelected = true;
                         CharacterStatusUI.Health.text = characterBasic.Health.ToString();
