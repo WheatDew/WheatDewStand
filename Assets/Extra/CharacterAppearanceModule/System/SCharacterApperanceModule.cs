@@ -11,19 +11,29 @@ public class SCharacterApperanceModule : ComponentSystem
 
     protected override void OnStartRunning()
     {
-        Entities.ForEach((CCharacterAppearance characterAppearance,CCharacterBasicModule characterBasic) =>
-        {
-            Texture4 texture4 = appearanceDictionary.TextureDictionary[characterBasic.Name];
-            characterAppearance.east = texture4.east;
-            characterAppearance.west = texture4.west;
-            characterAppearance.south = texture4.south;
-            characterAppearance.north = texture4.north;
-        });
+        
     }
 
     protected override void OnUpdate()
     {
+        SetApperanceTextureJob();
         SetApperanceJob();
+    }
+
+    public void SetApperanceTextureJob()
+    {
+        Entities.ForEach((CCharacterAppearance characterAppearance, CCharacterBasicModule characterBasic) =>
+        {
+            if (characterAppearance.TextureSetFlag)
+            {
+                Texture4 texture4 = appearanceDictionary.TextureDictionary[characterBasic.Name];
+                characterAppearance.east = texture4.east;
+                characterAppearance.west = texture4.west;
+                characterAppearance.south = texture4.south;
+                characterAppearance.north = texture4.north;
+                characterAppearance.TextureSetFlag = false;
+            }
+        });
     }
 
     public void SetApperanceJob()

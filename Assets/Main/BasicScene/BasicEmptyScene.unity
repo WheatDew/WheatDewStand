@@ -334,6 +334,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CharacterBasicModuleAssignPrefab: {fileID: 2843687331842539305, guid: 970aecec1ec33664caf2d041e6ef6780,
     type: 3}
+  characterStatusUIPrefab: {fileID: 1583188704798684314, guid: 83f00e981c3eee44aa98f746e5c7a3ce,
+    type: 3}
 --- !u!4 &826300195
 Transform:
   m_ObjectHideFlags: 0

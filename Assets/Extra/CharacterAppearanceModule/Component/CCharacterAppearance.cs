@@ -5,4 +5,5 @@ using UnityEngine;
 public class CCharacterAppearance : MonoBehaviour
 {
     public Texture east, north, south, west;
+    public bool TextureSetFlag=true;
 }

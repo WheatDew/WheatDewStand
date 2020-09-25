@@ -13,6 +13,7 @@ public class SCollectedItemAndCharacterCollectedAbility : ComponentSystem
         TargetCollectedItem();
         OpenCollectedItemMenuJob();
         CollectingItemJob();
+        CheckLeaveCollectedItemJob();
     }
 
     public void CollectingItemJob()
@@ -68,19 +69,24 @@ public class SCollectedItemAndCharacterCollectedAbility : ComponentSystem
             bool correctClickedFlag = false;
             Entities.ForEach((CCollectedItem collectedItem) =>
             {
+                
                 if (collectedItem.gameObject == raycastInfo.collider.gameObject)
                 {
                     Entities.ForEach((CCharacterNavMeshCommand characterNavMeshCommand, 
-                        CCharacterCollectedAbility characterCollectedAbility) =>
+                        CCharacterCollectedAbility characterCollectedAbility,CCharacterBasicModule basic) =>
                     {
-                        //ToDo: 风险很高的行为,未来需要修改
-                        characterNavMeshCommand.CommandList.Push(1);
+                        if (basic.isSelected)
+                        {
+                            //ToDo: 风险很高的行为,未来需要修改
+                            characterNavMeshCommand.CommandList.Push(1);
 
-                        collectedItemMenuController.gameObject.SetActive(true);
-                        collectedItemMenuController.CreateItem("采集", characterCollectedAbility, collectedItem);
-                    collectedItemMenuController.rectTransform.position = Input.mousePosition;
-                        correctClickedFlag = true;
+                            collectedItemMenuController.gameObject.SetActive(true);
+                            collectedItemMenuController.CreateItem("采集", characterCollectedAbility, collectedItem);
+                            collectedItemMenuController.rectTransform.position = Input.mousePosition;
+                            correctClickedFlag = true;
+                        }
                     });
+
                 }
 
             });
@@ -104,6 +110,26 @@ public class SCollectedItemAndCharacterCollectedAbility : ComponentSystem
                 characterNavMeshCommand.CommandList.Push(2);
             });
         }
+    }
+
+    public void CheckLeaveCollectedItemJob()
+    {
+        Entities.ForEach((CCharacterCollectedAbility collectedAbility,CCharacterActionStatus actionStatus) =>
+        {
+            if (collectedAbility.CollectedItemTarget != null&& actionStatus.CurrentActionStatus == 3)
+            {
+                if (Vector3.Distance(collectedAbility.transform.position, collectedAbility.CollectedItemTarget.transform.position) > 1.5f)
+                {
+                    collectedAbility.CollectedItemTarget = null;
+                }
+            }
+            if (collectedAbility.CollectedItemTarget == null&& actionStatus.CurrentActionStatus==3)
+            {
+                actionStatus.CurrentActionStatus = 0;
+            }
+
+
+        });
     }
 }
 

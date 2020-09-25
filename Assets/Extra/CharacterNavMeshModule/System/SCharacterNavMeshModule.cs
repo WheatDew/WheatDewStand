@@ -21,8 +21,8 @@ public class SCharacterNavMeshModule : ComponentSystem
             RaycastHit raycastInfo;
             Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out raycastInfo);
 
-            Entities.ForEach((CCharacterBasicModule cChareterBasic, NavMeshAgent navMeshAgent,CCharacterNavMesh characterNavMesh) => {
-                if(!characterNavMesh.KeepStanding)
+            Entities.ForEach((CCharacterBasicModule characterBasic, NavMeshAgent navMeshAgent,CCharacterNavMesh characterNavMesh) => {
+                if(!characterNavMesh.KeepStanding&&characterBasic.isSelected)
                 navMeshAgent.destination = raycastInfo.point;
             });
         }

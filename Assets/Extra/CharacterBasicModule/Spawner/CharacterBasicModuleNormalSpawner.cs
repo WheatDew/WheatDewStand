@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Entities;
 
 
 public class CharacterBasicModuleNormalSpawner : MonoBehaviour
@@ -9,6 +10,8 @@ public class CharacterBasicModuleNormalSpawner : MonoBehaviour
     private GameObject CharacterBasicModuleAssignPrefab;
     [System.NonSerialized]
     public GameObject CharacterBasicModulePrefab;
+    [SerializeField]
+    private UCharacterStatus characterStatusUIPrefab;
 
     private void Awake()
     {
@@ -18,7 +21,8 @@ public class CharacterBasicModuleNormalSpawner : MonoBehaviour
 
     private void Start()
     {
-        
+        UCharacterStatus characterStatusUI = Instantiate(characterStatusUIPrefab, transform);
+        World.DefaultGameObjectInjectionWorld.GetExistingSystem<SCharacterBasicModule>().CharacterStatusUI = characterStatusUI;
     }
 
     public void Update()

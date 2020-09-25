@@ -8,19 +8,6 @@ public class CharacterPackMenuController : MonoBehaviour
     public RectTransform rectTransform;
     public Transform itemParent;
     public CharacterPackMenuItem characterPackMenuItemPrefab;
+    public CharacterPackMenuItem[] characterPackMenuItemList;
 
-    public void CreateItem(string buttonName)
-    {
-        Debug.Log("创建按钮");
-        CharacterPackMenuItem collectedItemMenuItem = Instantiate(characterPackMenuItemPrefab, itemParent);
-        collectedItemMenuItem.Initialization(buttonName);
-    }
-
-    private void OnEnable()
-    {
-        for(int i = 0; i < itemParent.childCount; i++)
-        {
-            Destroy(itemParent.GetChild(i).gameObject);
-        }
-    }
 }

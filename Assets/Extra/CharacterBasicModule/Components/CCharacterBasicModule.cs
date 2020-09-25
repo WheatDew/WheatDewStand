@@ -9,5 +9,8 @@ public class CCharacterBasicModule : MonoBehaviour
 {
     public string Name;
     public bool isSelected;
+    public float Health=100, Hunger=100;
+    public float HungerTimer=0;
+    public float HungerDecreaseCycle=5;
     public MeshRenderer meshRenderer;
 }

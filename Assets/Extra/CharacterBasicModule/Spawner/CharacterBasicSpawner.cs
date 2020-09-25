@@ -7,6 +7,7 @@ using UnityEngine;
 public class CharacterBasicSpawner : MonoBehaviour
 {
     public GameObject characterPrefabOrigin;
+    public GameObject characterStatusUIGroup;
 
 
     void Start()

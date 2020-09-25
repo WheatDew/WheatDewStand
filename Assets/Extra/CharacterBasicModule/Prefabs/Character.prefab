@@ -96,6 +96,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: siro
   isSelected: 0
+  Health: 100
+  Hunger: 100
+  HungerTimer: 0
+  HungerDecreaseCycle: 5
   meshRenderer: {fileID: 2843687332086641006}
 --- !u!114 &9113313151349917871
 MonoBehaviour:
@@ -124,7 +128,7 @@ GameObject:
   - component: {fileID: 2843687332086641007}
   m_Layer: 0
   m_Name: Plane
-  m_TagString: Untagged
+  m_TagString: Character
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

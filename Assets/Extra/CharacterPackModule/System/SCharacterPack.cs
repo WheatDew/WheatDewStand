@@ -7,7 +7,11 @@ using UnityEngine.Events;
 public class SCharacterPack : ComponentSystem
 {
     public CharacterPackMenuController characterPackController;
-
+    private struct TempItem
+    {
+        public string Name;
+        public int Value;
+    }
     protected override void OnUpdate()
     {
         PackPageJob();
@@ -29,26 +33,39 @@ public class SCharacterPack : ComponentSystem
 
     public void PackPageJob()
     {
+        if(characterPackController.gameObject.activeSelf)
+        Entities.ForEach((CCharacterPack pack,CCharacterBasicModule basic) =>
+        {
+            if (basic.isSelected)
+            {
+                List<TempItem> tempItemList = new List<TempItem>();
+                foreach (var item in pack.Pack)
+                {
+                    tempItemList.Add(new TempItem { Name = item.Key, Value = item.Value });
+                }
+                foreach (var item in characterPackController.characterPackMenuItemList)
+                {
+                    item.gameObject.SetActive(false);
+                }
+                for (int i = 0; i < tempItemList.Count; i++)
+                {
+                    characterPackController.characterPackMenuItemList[i].buttonText.text = tempItemList[i].Name;
+                    characterPackController.characterPackMenuItemList[i].countText.text = tempItemList[i].Value.ToString();
+                    characterPackController.characterPackMenuItemList[i].characterBasicModule = basic;
+                    characterPackController.characterPackMenuItemList[i].gameObject.SetActive(true);
+                }
+            }
+
+        });
+
         if (Input.GetKeyDown(KeyCode.I))
         {
             if (!characterPackController.gameObject.activeSelf)
             {
-                Entities.ForEach((CCharacterPack pack) =>
-                {
-                    Debug.Log(pack.Pack.Count);
-                    foreach (var item in pack.Pack)
-                    {
-                        characterPackController.CreateItem(item.Key);
-                    }
-                });
                 characterPackController.gameObject.SetActive(true);
             }
             else
             {
-                for(int i = 0; i < characterPackController.itemParent.childCount; i++)
-                {
-                    Object.Destroy(characterPackController.itemParent.GetChild(i));
-                }
                 characterPackController.gameObject.SetActive(false);
             }
         }

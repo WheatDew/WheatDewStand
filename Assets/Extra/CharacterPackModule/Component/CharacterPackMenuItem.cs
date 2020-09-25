@@ -6,18 +6,21 @@ using UnityEngine.UI;
 public class CharacterPackMenuItem : MonoBehaviour
 {
     public Text buttonText;
+    public Text countText;
     public Button selfButton;
+    public CCharacterBasicModule characterBasicModule;
 
     public void Start()
     {
         selfButton.onClick.AddListener(delegate
         {
-            
+            if(characterBasicModule!=null)
+            characterBasicModule.Hunger += 10;
         });
     }
 
-    public void Initialization(string buttonText)
+    private void OnEnable()
     {
-        this.buttonText.text = buttonText;
+        characterBasicModule = null;
     }
 }
