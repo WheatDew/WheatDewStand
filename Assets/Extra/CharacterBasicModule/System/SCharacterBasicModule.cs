@@ -11,7 +11,6 @@ public class SCharacterBasicModule : ComponentSystem
     {
         SelectionJob();
         HungerJob();
-        UCharacterStatusUpdataJob();
     }
 
     public void SelectionJob()
@@ -54,19 +53,25 @@ public class SCharacterBasicModule : ComponentSystem
             {
                 basic.Hunger -= 1;
                 basic.HungerTimer = 0;
+                if (basic.Hunger < 0)
+                    basic.Health -= basic.Hunger;
             }
+            
+            DisplayCharacterStatus(basic);
         });
     }
 
-    public void UCharacterStatusUpdataJob()
+    #region 功能函数
+    public void DisplayCharacterStatus(CCharacterBasicModule basic)
     {
-        Entities.ForEach((CCharacterBasicModule basic) =>
+        if (basic.isSelected)
         {
-            if (basic.isSelected)
-            {
-                CharacterStatusUI.Hunger.text = basic.Hunger.ToString();
-                CharacterStatusUI.Health.text = basic.Health.ToString();
-            }
-        });
+            CharacterStatusUI.Hunger.text = basic.Hunger.ToString();
+            CharacterStatusUI.Health.text = basic.Health.ToString();
+        }
     }
+
+
+
+    #endregion
 }
