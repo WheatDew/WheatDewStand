@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class MWorkbench : MonoBehaviour
 {
-    [SerializeField]
-    private CollectedItemModelUIGroup collectedItemModelUIGroup;
-    [SerializeField]
-    private EWorkbench workbenchModuleSpawnerExpansion;
-    [System.NonSerialized]
-    public EWorkbench currentWorkbenchModuleSpawnerExpansion;
+    //[SerializeField]
+    //private CollectedItemModelUIGroup collectedItemModelUIGroup;
+    //[SerializeField]
+    //private EWorkbench workbenchModuleSpawnerExpansion;
+    //[System.NonSerialized]
+    //public EWorkbench currentWorkbenchModuleSpawnerExpansion;
     [SerializeField]
     private GameObject WorkbenchPrefab;
 
@@ -21,12 +21,12 @@ public class MWorkbench : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.G))
-            CreateCollectedItem(new Vector3(6, 0, 6));
+        if (Input.GetKeyDown(KeyCode.H))
+            CreateWorkbench(new Vector3(6, 0, 6));
     }
 
-    public void CreateCollectedItem(Vector3 position)
+    public void CreateWorkbench(Vector3 position)
     {
-        GameObject collectedItem = Instantiate(WorkbenchPrefab, position, Quaternion.AngleAxis(0, Vector3.up));
+        GameObject workbench = Instantiate(WorkbenchPrefab, position, Quaternion.AngleAxis(0, Vector3.up));
     }
 }

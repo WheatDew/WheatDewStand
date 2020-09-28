@@ -4,56 +4,50 @@ using UnityEngine;
 using Unity.Entities;
 using UnityEngine.AI;
 
-public class SWorkBench : ComponentSystem
+public class SWorkbench : ComponentSystem
 {
-    public CollectedItemMenuController collectedItemMenuController;
+    public RWorkbench workbenchMenuController;
     protected override void OnUpdate()
     {
-        TargetCollectedItem();
-        OpenCollectedItemMenuJob();
-        CollectingItemJob();
-        CheckLeaveCollectedItemJob();
+
     }
 
-    public void CollectingItemJob()
+    public void CraftJob()
     {
-        Entities.ForEach((CCharacterActionStatus actionStatus, CCharacterCollectedAbility collectedAbility, CCharacterPack pack) =>
+        Entities.ForEach((CCharacterActionStatus actionStatus, CCharacterWorkbenchAbility workbenchAbility, CCharacterPack pack) =>
         {
-            if (actionStatus.CurrentActionStatus == 3 && collectedAbility.CollectedItemTarget != null)
+            if (actionStatus.CurrentActionStatus == 2 && workbenchAbility.workbenchTarget != null)
             {
-                collectedAbility.timer += Time.DeltaTime;
-                if (collectedAbility.timer > collectedAbility.workTime)
+                workbenchAbility.timer += Time.DeltaTime;
+                if (workbenchAbility.timer > workbenchAbility.workTime)
                 {
-                    pack.TaskList.Push(new TCharacterPack { Getting = new string[1] { "桃子" }, Losing = new string[0] { } });
-                    collectedAbility.timer = 0;
+                    pack.TaskList.Push(new TCharacterPack { Getting = new string[1] { "果脯" }, Losing = new string[1] { "桃子" } });
+                    workbenchAbility.timer = 0;
                 }
             }
         });
     }
 
-    public void TargetCollectedItem()
+    public void TargetWorkbench()
     {
-        Entities.ForEach((Transform transform, CCharacterCollectedAbility CCA, NavMeshAgent NMA, CCharacterActionStatus CAS) =>
+        Entities.ForEach((Transform transform, CCharacterWorkbenchAbility CWA, NavMeshAgent NMA, CCharacterActionStatus CAS) =>
         {
-            if (CCA.CollectedItemTarget != null)
+            if (CWA.workbenchTarget != null)
             {
-
-                if (Vector3.Distance(transform.position, CCA.CollectedItemTarget.transform.position) > 0.5f)
+                if (Vector3.Distance(transform.position, CWA.workbenchTarget.transform.position) > 0.5f)
                 {
 
-                    if (CCA.CollectedItemTarget.transform.position != CCA.CollectedItemTarget.transform.position - (CCA.CollectedItemTarget.transform.position - transform.position).normalized * 1.5f)
-                        NMA.destination = CCA.CollectedItemTarget.transform.position - (CCA.CollectedItemTarget.transform.position - transform.position).normalized * 0.5f;
+                    if (CWA.workbenchTarget.transform.position != CWA.workbenchTarget.transform.position - (CWA.workbenchTarget.transform.position - transform.position).normalized * 1.5f)
+                        NMA.destination = CWA.workbenchTarget.transform.position - (CWA.workbenchTarget.transform.position - transform.position).normalized * 0.5f;
                 }
                 else
                 {
                     if (CAS.CurrentActionStatus == 0)
                     {
-                        CAS.CurrentActionStatus = 3;
+                        CAS.CurrentActionStatus = 2;
 
                     }
-
                 }
-
             }
         });
     }
@@ -66,22 +60,22 @@ public class SWorkBench : ComponentSystem
             RaycastHit raycastInfo;
             Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out raycastInfo);
             bool correctClickedFlag = false;
-            Entities.ForEach((CCollectedItem collectedItem) =>
+            Entities.ForEach((CWorkBench workbench) =>
             {
 
-                if (collectedItem.gameObject == raycastInfo.collider.gameObject)
+                if (workbench.gameObject == raycastInfo.collider.gameObject)
                 {
                     Entities.ForEach((CCharacterNavMeshCommand characterNavMeshCommand,
-                        CCharacterCollectedAbility characterCollectedAbility, CCharacterBasicModule basic) =>
+                        CCharacterWorkbenchAbility CWA, CCharacterBasicModule basic) =>
                     {
                         if (basic.isSelected)
                         {
                             //ToDo: 风险很高的行为,未来需要修改
                             characterNavMeshCommand.CommandList.Push(1);
 
-                            collectedItemMenuController.gameObject.SetActive(true);
-                            collectedItemMenuController.CreateItem("采集", characterCollectedAbility, collectedItem);
-                            collectedItemMenuController.rectTransform.position = Input.mousePosition;
+                            workbenchMenuController.gameObject.SetActive(true);
+                            //collectedItemMenuController.CreateItem("工作", CWA, workbench);
+                            //collectedItemMenuController.rectTransform.position = Input.mousePosition;
                             correctClickedFlag = true;
                         }
                     });
@@ -91,7 +85,7 @@ public class SWorkBench : ComponentSystem
             });
             if (!correctClickedFlag)
             {
-                collectedItemMenuController.gameObject.SetActive(false);
+                workbenchMenuController.gameObject.SetActive(false);
                 Entities.ForEach((CCharacterNavMeshCommand characterNavMeshCommand,
                     CCharacterCollectedAbility characterCollectedAbility) =>
                 {
@@ -103,7 +97,7 @@ public class SWorkBench : ComponentSystem
         }
         if (Input.GetMouseButtonUp(0))
         {
-            collectedItemMenuController.gameObject.SetActive(false);
+            workbenchMenuController.gameObject.SetActive(false);
             Entities.ForEach((CCharacterNavMeshCommand characterNavMeshCommand, CCharacterCollectedAbility characterCollectedAbility) =>
             {
                 characterNavMeshCommand.CommandList.Push(2);
