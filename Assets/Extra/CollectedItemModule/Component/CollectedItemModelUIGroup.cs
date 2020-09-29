@@ -5,11 +5,11 @@ using Unity.Entities;
 
 public class CollectedItemModelUIGroup : MonoBehaviour
 {
-    public RWorkbench workbenchMenuController;
+    public CollectedItemMenuController collectedItemMenuController;
 
     private void Start()
     {
-        World.DefaultGameObjectInjectionWorld.GetExistingSystem<SWorkbench>()
-            .workbenchMenuController = workbenchMenuController;
+        World.DefaultGameObjectInjectionWorld.GetExistingSystem<SCollectedItemAndCharacterCollectedAbility>()
+            .collectedItemMenuController = collectedItemMenuController;
     }
 }

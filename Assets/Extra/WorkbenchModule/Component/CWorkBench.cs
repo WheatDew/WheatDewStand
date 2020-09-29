@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CWorkBench : MonoBehaviour
+public class CWorkbench : MonoBehaviour
 {
     
 }

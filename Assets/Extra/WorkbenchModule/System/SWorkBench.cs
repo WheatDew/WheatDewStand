@@ -9,7 +9,7 @@ public class SWorkbench : ComponentSystem
     public RWorkbench workbenchMenuController;
     protected override void OnUpdate()
     {
-
+        OpenCollectedItemMenuJob();
     }
 
     public void CraftJob()
@@ -60,9 +60,8 @@ public class SWorkbench : ComponentSystem
             RaycastHit raycastInfo;
             Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out raycastInfo);
             bool correctClickedFlag = false;
-            Entities.ForEach((CWorkBench workbench) =>
+            Entities.ForEach((CWorkbench workbench) =>
             {
-
                 if (workbench.gameObject == raycastInfo.collider.gameObject)
                 {
                     Entities.ForEach((CCharacterNavMeshCommand characterNavMeshCommand,
@@ -79,18 +78,16 @@ public class SWorkbench : ComponentSystem
                             correctClickedFlag = true;
                         }
                     });
-
                 }
-
             });
             if (!correctClickedFlag)
             {
                 workbenchMenuController.gameObject.SetActive(false);
                 Entities.ForEach((CCharacterNavMeshCommand characterNavMeshCommand,
-                    CCharacterCollectedAbility characterCollectedAbility) =>
+                    CCharacterWorkbenchAbility workbenchAbility) =>
                 {
                     characterNavMeshCommand.CommandList.Push(2);
-                    characterCollectedAbility.CollectedItemTarget = null;
+                    workbenchAbility.workbenchTarget = null;
                 });
             }
 

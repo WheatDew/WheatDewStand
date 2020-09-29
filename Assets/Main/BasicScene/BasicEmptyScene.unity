@@ -287,6 +287,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eede4053b6263294983f55e4a2f96a08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  WorkbenchModelUIGroup: {fileID: 557165958668111406, guid: 0208bf88b0f60974e889661b0f771b2f,
+    type: 3}
+  workbenchModuleSpawnerExpansion: {fileID: 6253800656412348584, guid: 43d59f98318110740a6e1dd9424055b5,
+    type: 3}
   WorkbenchPrefab: {fileID: 8820535752105419172, guid: 17f6c6d9ea412a4499ed904c5a3d3fd5,
     type: 3}
 --- !u!4 &552552869

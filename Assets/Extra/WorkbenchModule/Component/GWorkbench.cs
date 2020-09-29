@@ -8,11 +8,11 @@ using Unity.Entities;
 /// </summary>
 public class GWorkbench : MonoBehaviour
 {
-    public CollectedItemMenuController collectedItemMenuController;
+    public RWorkbench workbenchMenuController;
 
     private void Start()
     {
-        World.DefaultGameObjectInjectionWorld.GetExistingSystem<SCollectedItemAndCharacterCollectedAbility>()
-            .collectedItemMenuController = collectedItemMenuController;
+        World.DefaultGameObjectInjectionWorld.GetExistingSystem<SWorkbench>()
+            .workbenchMenuController = workbenchMenuController;
     }
 }

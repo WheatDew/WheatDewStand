@@ -6,12 +6,12 @@ public class RWorkbench : MonoBehaviour
 {
     public RectTransform rectTransform;
     public Transform itemParent;
-    public CCollectedItemMenuItem collectedItemMenuItemPrefab;
+    public WorkbenchMenuItem workBenchMenuItemPrefab;
 
-    public void CreateItem(string buttonName, CCharacterCollectedAbility characterCollectedAbility, CCollectedItem collectedItem)
+    public void CreateItem(string buttonName, CCharacterWorkbenchAbility workbenchAbility, CWorkbench workbench)
     {
-        CCollectedItemMenuItem collectedItemMenuItem = Instantiate(collectedItemMenuItemPrefab, itemParent);
-        collectedItemMenuItem.Initialization(buttonName, characterCollectedAbility, collectedItem);
+        WorkbenchMenuItem TempWorkbenchMenuItem = Instantiate(workBenchMenuItemPrefab, itemParent);
+        TempWorkbenchMenuItem.Initialization(buttonName, workbenchAbility, workbench);
     }
 
     private void OnEnable()

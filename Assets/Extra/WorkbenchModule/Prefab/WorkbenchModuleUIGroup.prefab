@@ -93,6 +93,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 21646286756175174}
+  - component: {fileID: 5249234104217479533}
   m_Layer: 5
   m_Name: WorkbenchModuleUIController
   m_TagString: Untagged
@@ -120,6 +121,22 @@ RectTransform:
   m_AnchoredPosition: {x: -960, y: -540}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &5249234104217479533
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 21646286756175175}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afe303ab2f5505d419454726e6a973d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rectTransform: {fileID: 21646286756175174}
+  itemParent: {fileID: 21646286275087508}
+  collectedItemMenuItemPrefab: {fileID: -6156756228881752978, guid: ca4c25ca1a7a70b4b80ee36f88b26b94,
+    type: 3}
 --- !u!1 &1001724167776326111
 GameObject:
   m_ObjectHideFlags: 0
@@ -129,6 +146,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5851650683068442297}
+  - component: {fileID: 557165958668111406}
   m_Layer: 5
   m_Name: WorkbenchModuleUIGroup
   m_TagString: Untagged
@@ -156,3 +174,16 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &557165958668111406
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1001724167776326111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45dcfdb42daaad94ca60e5b5343058a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  workbenchMenuController: {fileID: 5249234104217479533}
