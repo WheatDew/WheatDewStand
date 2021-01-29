@@ -44,15 +44,22 @@ public class SCharacterApperanceModule : ComponentSystem
             {
                 case "east":
                     characterBasic.meshRenderer.material.mainTexture=characterAppearance.east;
+                    characterBasic.animator.SetInteger("direction", 3);
                     break;
                 case "west":
                     characterBasic.meshRenderer.material.mainTexture = characterAppearance.west;
+                    characterBasic.animator.SetInteger("direction", 4);
                     break;
                 case "north":
                     characterBasic.meshRenderer.material.mainTexture = characterAppearance.north;
+                    characterBasic.animator.SetInteger("direction", 1);
                     break;
                 case "south":
                     characterBasic.meshRenderer.material.mainTexture = characterAppearance.south;
+                    characterBasic.animator.SetInteger("direction", 2);
+                    break;
+                default:
+                    characterBasic.animator.SetInteger("direction", 0);
                     break;
             }
         });

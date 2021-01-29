@@ -13,4 +13,5 @@ public class CCharacterBasicModule : MonoBehaviour
     public float HungerTimer=0;
     public float HungerDecreaseCycle=5;
     public MeshRenderer meshRenderer;
+    public Animator animator;
 }
