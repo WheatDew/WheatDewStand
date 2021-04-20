@@ -59,6 +59,7 @@ public class SCollectedItemAndCharacterCollectedAbility : ComponentSystem
         });
     }
 
+    //打开收藏菜单
     public void OpenCollectedItemMenuJob()
     {
 

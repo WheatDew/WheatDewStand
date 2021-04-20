@@ -9,7 +9,10 @@ public class CollectedItemModelUIGroup : MonoBehaviour
 
     private void Start()
     {
+        //为指定系统添加参数
         World.DefaultGameObjectInjectionWorld.GetExistingSystem<SCollectedItemAndCharacterCollectedAbility>()
+            .collectedItemMenuController = collectedItemMenuController;
+        World.DefaultGameObjectInjectionWorld.GetExistingSystem<SCharacterBuildingAbility>()
             .collectedItemMenuController = collectedItemMenuController;
     }
 }

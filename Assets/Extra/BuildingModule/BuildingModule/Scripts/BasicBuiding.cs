@@ -4,15 +4,24 @@ using UnityEngine;
 
 public class BasicBuiding : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public SpriteRenderer display;
+    public bool isFloat;
 
-    // Update is called once per frame
-    void Update()
+    public void Update()
     {
-        
+        if (isFloat)
+        {
+            RaycastHit result;
+            if (Physics.Raycast(Camera.main.ViewportPointToRay(Input.mousePosition), out result))
+            {
+                gameObject.SetActive(true);
+                transform.position = result.point;
+            }
+            else
+            {
+                gameObject.SetActive(false);
+            }
+
+        }
     }
 }

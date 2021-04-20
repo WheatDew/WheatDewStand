@@ -10,6 +10,11 @@ public class BluePrintButtonListElement : MonoBehaviour
 
     private void Start()
     {
-        bluePrintButtonMode.basicBuidingAssign = basicBuiding;   
+        GetComponent<Button>().onClick.AddListener(AssignBasicBuidingButton);
+    }
+
+    public void AssignBasicBuidingButton()
+    {
+        bluePrintButtonMode.basicBuidingAssign = basicBuiding;
     }
 }

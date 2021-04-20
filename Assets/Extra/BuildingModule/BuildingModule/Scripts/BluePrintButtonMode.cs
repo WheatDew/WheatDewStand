@@ -13,16 +13,21 @@ public class BluePrintButtonMode : MonoBehaviour
 
     private void Update()
     {
+        RaycastHit raycastHit;
+        Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out raycastHit);
+
         if (Input.GetMouseButtonDown(0)&&basicBuidingAssign!=null)
         {
-            RaycastHit raycastHit;
-            Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out raycastHit);
             if (raycastHit.point != Vector3.zero)
             {
                 BasicBuiding obj = Instantiate(basicBuidingAssign, raycastHit.point, basicBuidingAssign.transform.rotation);
             }
 
-        }   
+        }
+        else if (Input.GetMouseButtonDown(1))
+        {
+            basicBuidingAssign = null;
+        }
 
     }
 }
