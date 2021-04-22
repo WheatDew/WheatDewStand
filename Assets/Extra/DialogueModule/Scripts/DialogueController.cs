@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class DialogueController : MonoBehaviour
 {
     public Text textContent;
+    public Text characterName;
+    public Animator TextBox;
     public DialogueClipLib clipLib;
     public string currentClip;
     public int currentPointer;
@@ -13,6 +15,7 @@ public class DialogueController : MonoBehaviour
 
     private void Start()
     {
+        clipLib.InitializationLib();
         SetLibClip("测试对话");
     }
 
@@ -30,7 +33,18 @@ public class DialogueController : MonoBehaviour
     {
         currentClip = clipName;
         currentPointer = 0;
-        textContent.text = clipLib.lib[clipName][currentPointer];
+        if (clipLib.lib[currentClip][currentPointer].Length > 0)
+        {
+            if (clipLib.lib[currentClip][currentPointer][0] == '@')
+            {
+                characterName.text = clipLib.lib[currentClip][currentPointer].Substring(1);
+                currentPointer++;
+                textContent.text = clipLib.lib[currentClip][currentPointer];
+            }
+            else
+                textContent.text = clipLib.lib[currentClip][currentPointer];
+        }
+        
     }
 
     public void SetNextText()
@@ -39,9 +53,23 @@ public class DialogueController : MonoBehaviour
         {
             currentPointer++;
             if (currentPointer < clipLib.lib[currentClip].Count)
-                SetTextValue(clipLib.lib[currentClip][currentPointer]);
-            else
-                ;
+            {
+                if (clipLib.lib[currentClip][currentPointer][0] == '@')
+                {
+                    characterName.text = clipLib.lib[currentClip][currentPointer].Substring(1);
+                    SetNextText();
+                }
+                else if(clipLib.lib[currentClip][currentPointer][0] == '$')
+                {
+                    TextBox.SetTrigger("shake");
+                    SetNextText();
+                }
+                else
+                {
+                    SetTextValue(clipLib.lib[currentClip][currentPointer]);
+                }
+                
+            }
         }
     }
 

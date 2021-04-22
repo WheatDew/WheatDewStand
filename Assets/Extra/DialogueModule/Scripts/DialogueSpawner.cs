@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class DialogueSpawner : MonoBehaviour
 {
-    public DialogueController dialogueControllerPrefab;
+    [SerializeField]
+    private DialogueController dialogueControllerPrefab;
+    [System.NonSerialized]
     public DialogueController dialogueController;
 
     private void Start()
