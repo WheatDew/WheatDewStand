@@ -11,6 +11,7 @@ public class DialogueController : MonoBehaviour
     public DialogueClipLib clipLib;
     public string currentClip;
     public int currentPointer;
+    public Button[] Selections;
 
 
     private void Start()
@@ -64,6 +65,12 @@ public class DialogueController : MonoBehaviour
                     TextBox.SetTrigger("shake");
                     SetNextText();
                 }
+                else if (clipLib.lib[currentClip][currentPointer][0] == '#')
+                {
+                    string[] tempStr = clipLib.lib[currentClip][currentPointer].Split(' ');
+                    SetSelection(tempStr[1],tempStr[2],tempStr[3]);
+                    SetNextText();
+                }
                 else
                 {
                     SetTextValue(clipLib.lib[currentClip][currentPointer]);
@@ -78,4 +85,19 @@ public class DialogueController : MonoBehaviour
         textContent.text = content;
     }
 
+    //添加对话选项
+    public void SetSelection(string number,string buttonText,string dialogueName)
+    {
+        int selectionID = int.Parse(number);
+        Selections[selectionID].transform.GetChild(0).GetComponent<Text>().text = buttonText;
+        Selections[selectionID].gameObject.SetActive(true);
+        Selections[selectionID].onClick.AddListener(delegate
+        {
+            foreach (var item in Selections)
+            {
+                SetLibClip(dialogueName);
+                item.gameObject.SetActive(false);
+            }
+        });
+    }
 }

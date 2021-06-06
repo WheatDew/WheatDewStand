@@ -33,7 +33,7 @@ public class SCharacterPack : ComponentSystem
 
     public void PackPageJob()
     {
-        if(characterPackController.gameObject.activeSelf)
+        if( characterPackController!=null&&characterPackController.gameObject.activeSelf)
         Entities.ForEach((CCharacterPack pack,CCharacterBasicModule basic) =>
         {
             if (basic.isSelected)

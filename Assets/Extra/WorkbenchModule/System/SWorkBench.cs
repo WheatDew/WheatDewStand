@@ -92,8 +92,9 @@ public class SWorkbench : ComponentSystem
             }
 
         }
-        if (Input.GetMouseButtonUp(0))
+        if (workbenchMenuController!=null&&Input.GetMouseButtonUp(0))
         {
+            
             workbenchMenuController.gameObject.SetActive(false);
             Entities.ForEach((CCharacterNavMeshCommand characterNavMeshCommand, CCharacterCollectedAbility characterCollectedAbility) =>
             {
