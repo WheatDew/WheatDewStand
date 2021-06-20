@@ -23,7 +23,7 @@ public class Character2DMovingController : MonoBehaviour
         Vector3 mp = Input.mousePosition - (new Vector3(1920 / 2, 1080 / 2));
         sword.transform.localRotation = Quaternion.Lerp(sword.transform.localRotation,
             Quaternion.FromToRotation(Vector3.right, mp.normalized), 0.1f);
-        Debug.Log(Input.mousePosition-(new Vector3(1920/2,1080/2)));
+        //Debug.Log(Input.mousePosition-(new Vector3(1920/2,1080/2)));
         //if (sv == 0)
         //{
         //    //sv = Random.Range(-360, 360);

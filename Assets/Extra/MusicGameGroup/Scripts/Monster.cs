@@ -13,7 +13,6 @@ public class Monster : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
         c2mc = FindObjectOfType<Character2DMovingController>();
-        
     }
 
     // Update is called once per frame
