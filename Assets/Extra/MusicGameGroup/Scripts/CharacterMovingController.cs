@@ -88,7 +88,7 @@ public class CharacterMovingController : MonoBehaviour
         //characterTransform.position += (Vector3.right * vh+Vector3.forward*vv+Vector3.up*jv)*Time.deltaTime*2;
         characterRigibody.AddRelativeForce(new Vector3(vh, 0, vv)*Time.deltaTime,ForceMode.VelocityChange);
 
-        Debug.Log(characterRigibody.velocity);
+        //Debug.Log(characterRigibody.velocity);
         if (characterRigibody.velocity.x > 2)
             characterRigibody.velocity = new Vector3(2, characterRigibody.velocity.y, characterRigibody.velocity.z);
         if (characterRigibody.velocity.x < -2)
