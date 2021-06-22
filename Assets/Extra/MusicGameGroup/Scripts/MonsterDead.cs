@@ -7,18 +7,16 @@ public class MonsterDead : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Invoke("ds_self", 2);
+        StartCoroutine(ds_self());
     }
 
-    public void ds_self()
+    public IEnumerator ds_self()
     {
+
+        yield return new WaitForSeconds(2);
+
         Destroy(gameObject);
+
     }
 
-    
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

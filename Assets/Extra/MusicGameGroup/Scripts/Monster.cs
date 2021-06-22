@@ -7,6 +7,8 @@ public class Monster : MonoBehaviour
 {
     private NavMeshAgent agent;
     public GameObject dead;
+    public Animator ani;
+    public SpriteRenderer sr;
     private Character2DMovingController c2mc;
     // Start is called before the first frame update
     void Start()
@@ -19,6 +21,14 @@ public class Monster : MonoBehaviour
     void Update()
     {
         agent.destination = c2mc.character.transform.position;
+        if (agent.destination.x < transform.position.x)
+        {
+            transform.localScale = new Vector3(-1, 1, 1);
+        }
+        else
+        {
+            transform.localScale = new Vector3(1, 1, 1);
+        }
         if (Input.GetKeyDown(KeyCode.K))
         {
             Destroy(gameObject);
@@ -29,12 +39,21 @@ public class Monster : MonoBehaviour
     {
         if(other.gameObject.name=="sword")
         {
+            if (dead != null)
+                Instantiate(dead, transform.position, Quaternion.Euler(90, 0, 0));
             Destroy(gameObject);
+        }
+        if (other.gameObject.name == "player")
+        {
+            StartCoroutine(bomb());
         }
     }
 
-    private void OnDestroy()
+    public IEnumerator bomb()
     {
-        Instantiate(dead,transform.position,dead.transform.rotation);
+        sr.color = Color.red;
+        yield return new WaitForSeconds(0.5f);
+        Instantiate(dead, transform.position, Quaternion.Euler(90, 0, 0));
+        Destroy(gameObject);
     }
 }

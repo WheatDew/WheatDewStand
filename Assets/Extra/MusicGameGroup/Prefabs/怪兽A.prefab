@@ -48,6 +48,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dead: {fileID: 4560846169494360939, guid: ea8a16ad77884314a9e75423cdbeb50f, type: 3}
+  ani: {fileID: 8086673620135226619}
+  sr: {fileID: 8086673620135226612}
 --- !u!195 &8086673619513065328
 NavMeshAgent:
   m_ObjectHideFlags: 0

@@ -76,7 +76,7 @@ public class Character2DMovingController : MonoBehaviour
         //characterTransform.position += (Vector3.right * vh + Vector3.forward * vv + Vector3.up * jv) * Time.deltaTime * 0.5f;
         characterRigibody.AddRelativeForce(new Vector3(vh, vv, 0) * Time.deltaTime, ForceMode.VelocityChange);
 
-        Debug.Log(characterRigibody.velocity);
+        //Debug.Log(characterRigibody.velocity);
         if (characterRigibody.velocity.x > 2)
             characterRigibody.velocity = new Vector3(2, characterRigibody.velocity.y, characterRigibody.velocity.z);
         if (characterRigibody.velocity.x < -2)
@@ -86,6 +86,10 @@ public class Character2DMovingController : MonoBehaviour
         if (characterRigibody.velocity.y < -2)
             characterRigibody.velocity = new Vector3(characterRigibody.velocity.x, -2, characterRigibody.velocity.z);
 
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
     }
 
     public void SetCharacterProperty(GameObject character, GameObject sword)
